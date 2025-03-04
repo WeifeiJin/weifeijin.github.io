@@ -8,7 +8,7 @@ redirect_from:
   - /about.html
 ---
 
-I'm an undergraduate student majoring in **Cyberspace Security** at 
+I'm an undergraduate student majoring in Cyberspace Security (Experimental Class) at 
 [Beijing University of Posts and Telecommunications (BUPT)](https://www.bupt.edu.cn/).
 My research interests lie in **Trustworthy AI**, **Adversarial Machine Learning**, and **Speech Security**.
 I have been working under the supervision of [Prof. Jie Hao](https://scss.bupt.edu.cn/info/1063/3808.htm) in the [National Engineering Research Center of Disaster Backup and Recovery](http://www.zaibei.org.cn/).
@@ -28,9 +28,9 @@ In the 2nd ACM Workshop on Secure and Trustworthy Deep Learning Systems (SecTL, 
 
 News
 ======
-- **01/2025**: Our paper on speech privacy protection was accepted by *USENIX Security 2025*.  
+- **01/2025**: Our paper on speech privacy protection against eavesdroppers was accepted by *USENIX Security 2025*.  
 - **09/2024**: We successfully received funding from the Beijing Natural Science Foundation Undergraduate “QiYan” Program.  
-- **04/2024**: Our paper on adversarial attacks against speech was accepted by *SecTL 2024 (AsiaCCS Workshop)*.
+- **04/2024**: Our paper on audio adversarial attacks was accepted by *SecTL 2024 (AsiaCCS Workshop)*.
 
 Projects
 ======
