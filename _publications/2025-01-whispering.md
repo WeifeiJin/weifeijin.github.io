@@ -1,7 +1,7 @@
 ---
 title: "Whispering Under the Eaves: Protecting User Privacy Against Commercial and LLM-powered Automatic Speech Recognition Systems"
 collection: publications
-category: published
+category: conferences
 permalink: /publication/2025-usenix-whispering
 excerpt: "To appear in the 34th USENIX Security Symposium (USENIX Security), 2025"
 date: 2025-01-01
