@@ -40,7 +40,7 @@ News
 Projects
 ======
 **Beijing Natural Science Foundation Undergraduate “QiYan” Program** (2024–2026, expected)  
-- Principal Investigator, awarded a grant of 50,000 RMB  
+- Principal Investigator
 - Focused on leveraging latent space features for adversarial perturbations on automatic speech recognition (ASR) systems  
 - Aim to enhance the security and robustness of ASR through novel defense and attack methodologies
 

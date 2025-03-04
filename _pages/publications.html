@@ -46,10 +46,13 @@ author_profile: true
       {% endunless %}
       <li>
         <strong><a href="{{ post.paperurl }}" target="_blank">{{ post.title }}</a></strong><br>
-        <i>{{ post.authors }}</i><br>
-<!--        Published in {{ post.venue }}, {{ post.date | date: "%Y" }}<br>-->
-        {{ post.excerpt }}<br>
-        <a href="{{ post.paperurl }}" target="_blank">Download Paper</a>
+        {% if post.citation %}
+          {{ post.citation | split: "." | first }}.<br>  <!-- Extract authors from citation -->
+        {% endif %}
+        {% if post.venue %}
+          <strong>Published in:</strong> {{ post.venue }}, {{ post.date | date: "%Y" }}<br>
+        {% endif %}
+        {{ post.excerpt }}
       </li>
     {% endfor %}
     </ul>  <!-- End unordered list -->
@@ -59,10 +62,13 @@ author_profile: true
   {% for post in site.publications reversed %}
     <li>
       <strong><a href="{{ post.paperurl }}" target="_blank">{{ post.title }}</a></strong><br>
-      <i>{{ post.authors }}</i><br>
-      Published in {{ post.venue }}, {{ post.date | date: "%Y" }}<br>
-      {{ post.excerpt }}<br>
-      <a href="{{ post.paperurl }}" target="_blank">Download Paper</a>
+      {% if post.citation %}
+        {{ post.citation | split: "." | first }}.<br>  <!-- Extract authors from citation -->
+      {% endif %}
+<!--      {% if post.venue %}-->
+<!--        <strong>Published in:</strong> {{ post.venue }}, {{ post.date | date: "%Y" }}<br>-->
+<!--      {% endif %}-->
+      {{ post.excerpt }}
     </li>
   {% endfor %}
   </ul>  <!-- End unordered list -->
