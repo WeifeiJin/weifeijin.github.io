@@ -12,6 +12,26 @@ author_profile: true
 {% include base_path %}
 
 <!-- New style rendering if publication categories are defined -->
+<!--{% if site.publication_category %}-->
+<!--  {% for category in site.publication_category %}-->
+<!--    {% assign title_shown = false %}-->
+<!--    {% for post in site.publications reversed %}-->
+<!--      {% if post.category != category[0] %}-->
+<!--        {% continue %}-->
+<!--      {% endif %}-->
+<!--      {% unless title_shown %}-->
+<!--        <h2>{{ category[1].title }}</h2><hr />-->
+<!--        {% assign title_shown = true %}-->
+<!--      {% endunless %}-->
+<!--      {% include archive-single.html %}-->
+<!--    {% endfor %}-->
+<!--  {% endfor %}-->
+<!--{% else %}-->
+<!--  {% for post in site.publications reversed %}-->
+<!--    {% include archive-single.html %}-->
+<!--  {% endfor %}-->
+<!--{% endif %}-->
+
 {% if site.publication_category %}
   {% for category in site.publication_category %}
     {% assign title_shown = false %}
@@ -21,16 +41,31 @@ author_profile: true
       {% endif %}
       {% unless title_shown %}
         <h2>{{ category[1].title }}</h2><hr />
+        <ul>  <!-- Start unordered list -->
         {% assign title_shown = true %}
       {% endunless %}
-      {% include archive-single.html %}
+      <li>
+        <strong><a href="{{ post.paperurl }}" target="_blank">{{ post.title }}</a></strong><br>
+        <i>{{ post.authors }}</i><br>
+        Published in {{ post.venue }}, {{ post.date | date: "%Y" }}<br>
+        {{ post.excerpt }}<br>
+        <a href="{{ post.paperurl }}" target="_blank">Download Paper</a>
+      </li>
     {% endfor %}
+    </ul>  <!-- End unordered list -->
   {% endfor %}
 {% else %}
+  <ul>  <!-- Start unordered list -->
   {% for post in site.publications reversed %}
-    {% include archive-single.html %}
+    <li>
+      <strong><a href="{{ post.paperurl }}" target="_blank">{{ post.title }}</a></strong><br>
+      <i>{{ post.authors }}</i><br>
+      Published in {{ post.venue }}, {{ post.date | date: "%Y" }}<br>
+      {{ post.excerpt }}<br>
+      <a href="{{ post.paperurl }}" target="_blank">Download Paper</a>
+    </li>
   {% endfor %}
+  </ul>  <!-- End unordered list -->
 {% endif %}
-
 
 
