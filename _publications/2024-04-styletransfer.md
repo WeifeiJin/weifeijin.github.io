@@ -1,7 +1,7 @@
 ---
 title: "Towards Evaluating the Robustness of Automatic Speech Recognition Systems via Audio Style Transfer"
 collection: publications
-category: published
+category: conferences
 permalink: /publication/2024-sectl-styletransfer
 excerpt: "In the 2nd ACM Workshop on Secure and Trustworthy Deep Learning Systems (SecTL, AsiaCCS Workshop), 2024, pp. 47–55."
 date: 2024-04-01
