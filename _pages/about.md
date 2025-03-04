@@ -26,17 +26,11 @@ To appear in the 34th USENIX Security Symposium (USENIX Security), 2025.
 <i>Weifei Jin, Yuxin Cao, Junjie Su, Qi Shen, Kai Ye, Derui Wang, Jie Hao, Ziyao Liu.</i>  
 In the 2nd ACM Workshop on Secure and Trustworthy Deep Learning Systems (SecTL, AsiaCCS Workshop), 2024, pp. 47–55.
 
-<a href="#" target="_blank">Boosting the Transferability of Audio Adversarial Examples with Acoustic Representation Optimization</a>.  
-<i>Weifei Jin, Junjie Su, Hejia Wang, Yulin Ye, Jie Hao.</i>  
-Submitted to IEEE International Conference on Multimedia & Expo (ICME) 2025. Under review.
-
-<a href="https://openreview.net/forum?id=xt3Lemk3YC&referrer=%5BAuthor%20Console%5D(%2Fgroup%3Fid%3Dauai.org%2FUAI%2F2025%2FConference%2FAuthors%23your-submissions)" target="_blank">Mirage Fools the Ear, Mute Hides the Truth: Precise Targeted Adversarial Attacks on Polyphonic Sound Event Detection Systems</a>.  
-<i>Junjie Su, Weifei Jin, Yuxin Cao, Derui Wang, Kai Ye, Jie Hao.</i>  
-Submitted to the 41st Conference on Uncertainty in Artificial Intelligence (UAI), 2025. Under review.
-
-<a href="https://arxiv.org/abs/2406.18379" target="_blank">MALSIGHT: Exploring Malicious Source Code and Benign Pseudocode for Iterative Binary Malware Summarization</a>.  
-<i>Haolang Lu, Hongrui Peng, Guoshun Nan, Jiaoyang Cui, Cheng Wang, Weifei Jin, Songtao Wang, Shengli Pan, Xiaofeng Tao.</i>  
-Submitted to IEEE Transactions on Information Forensics and Security (TIFS). Under review.
+News
+======
+- **01/2025**: Our paper on speech privacy protection was accepted by *USENIX Security 2025*.  
+- **09/2024**: We successfully received funding from the Beijing Natural Science Foundation Undergraduate “QiYan” Program.  
+- **04/2024**: Our paper on adversarial attacks against speech was accepted by *SecTL 2024 (AsiaCCS Workshop)*.
 
 Projects
 ======
@@ -52,8 +46,8 @@ Projects
 
 Awards
 ======
-**Second-Class Scholarship**, Beijing University of Posts and Telecommunications (2024)  
-**“Three-Good Student”**, Beijing University of Posts and Telecommunications (2024)  
-**Second Prize**, 9th National Cryptography Technology Competition (2024)  
-**Rank 1st** in GPA in the major for two consecutive academic years  
+- **Second-Class Scholarship**, Beijing University of Posts and Telecommunications (2024)  
+- **“Three-Good Student”**, Beijing University of Posts and Telecommunications (2024)  
+- **Second Prize**, 9th National Cryptography Technology Competition (2024)  
+- **Rank 1st** in GPA in the major for two consecutive academic years  
 
