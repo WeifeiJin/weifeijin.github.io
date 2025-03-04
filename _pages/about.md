@@ -51,3 +51,9 @@ Awards
 - **Second Prize**, 9th National Cryptography Technology Competition (2024)  
 - **Rank 1st** in GPA in the major for two consecutive academic years  
 
+Services
+======
+- **Academic Reviewing**: Served as a reviewer for ICME 2025, WWW 2024.
+- **Mentoring**: Guided junior students in Cyberspace Security projects focusing on adversarial attacks.
+
+<script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=74xmXege_Rnxq-XM2ukNrGa3N6nErUb2rU4kIOR0ewU&cl=ffffff&w=a"></script>
