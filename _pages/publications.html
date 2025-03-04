@@ -49,9 +49,9 @@ author_profile: true
         {% if post.citation %}
           {{ post.citation | split: "." | first }}.<br>  <!-- Extract authors from citation -->
         {% endif %}
-        {% if post.venue %}
-          <strong>Published in:</strong> {{ post.venue }}, {{ post.date | date: "%Y" }}<br>
-        {% endif %}
+<!--        {% if post.venue %}-->
+<!--          <strong>Published in:</strong> {{ post.venue }}, {{ post.date | date: "%Y" }}<br>-->
+<!--        {% endif %}-->
         {{ post.excerpt }}
       </li>
     {% endfor %}
