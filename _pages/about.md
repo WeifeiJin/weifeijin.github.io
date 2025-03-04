@@ -12,7 +12,7 @@ I'm an undergraduate student majoring in Cyberspace Security (Experimental Class
 [Beijing University of Posts and Telecommunications (BUPT)](https://www.bupt.edu.cn/).
 My research interests lie in **Trustworthy AI**, **Adversarial Machine Learning**, and **Speech Security**.
 I have been working under the supervision of [Prof. Jie Hao](https://scss.bupt.edu.cn/info/1063/3808.htm) in the [National Engineering Research Center of Disaster Backup and Recovery](http://www.zaibei.org.cn/).
-I also collaborate closely with [Dr. Yuxin Cao](https://scholar.google.com/citations?user=GCYqueEAAAAJ) (from [NUS](https://www.comp.nus.edu.sg/)) and [Dr. Derui Wang](https://scholar.google.com.au/citations?user=uAbiaaUAAAAJ) (from [CSIRO's Data61](https://www.csiro.au/en/research/technology-space?start=0&count=12)).
+I also collaborate closely with [Dr. Yuxin Cao](https://yuxincao22.github.io/) (from [NUS](https://www.comp.nus.edu.sg/)) and [Dr. Derui Wang](https://neuralsec.github.io/) (from [CSIRO's Data61](https://www.csiro.au/en/research/technology-space?start=0&count=12)).
 
 If you would like to learn more about my work, feel free to check out my recent publications below or contact me directly.
 
@@ -52,7 +52,7 @@ Projects
 Awards
 ======
 - **Second-Class Scholarship**, Beijing University of Posts and Telecommunications (2024)  
-- **“Three-Good Student”**, Beijing University of Posts and Telecommunications (2024)  
+- **“Merit Student”**, Beijing University of Posts and Telecommunications (2024)  
 - **Second Prize**, 9th National Cryptography Technology Competition (2024)  
 - **Rank 1st** in GPA in the major for two consecutive academic years  
 
