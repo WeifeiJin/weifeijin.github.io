@@ -21,11 +21,17 @@ If you would like to learn more about my work, feel free to check out my recent 
 Publications
 ======
 - <a href="#" target="_blank">
+  Boosting the Transferability of Audio Adversarial Examples with Acoustic Representation Optimization
+  </a>
+  <i>Weifei Jin, Junjie Su, Hejia Wang, Yulin Ye, Jie Hao.</i>
+  To appear in IEEE International Conference on Multimedia &amp; Expo (ICME), 2025. Nantes, France.
+
+- <a href="#" target="_blank">
   Whispering Under the Eaves: Protecting User Privacy Against Commercial and LLM-powered Automatic Speech Recognition Systems
   </a>  
   <i>Weifei Jin, Yuxin Cao, Junjie Su, Derui Wang, Yedi Zhang, Minhui Xue, Jie Hao, Jin Song Dong, Yixian Yang.</i>  
   To appear in the 34th USENIX Security Symposium (USENIX Security), 2025.
-  
+
 - <a href="https://arxiv.org/abs/2405.09470" target="_blank">
   Towards Evaluating the Robustness of Automatic Speech Recognition Systems via Audio Style Transfer
   </a>  
@@ -35,9 +41,11 @@ Publications
 
 News
 ======
+- **03/2025**: Our paper on boosting the transferability of audio adversarial examples was accepted by *ICME 2025*.  
 - **01/2025**: Our paper on speech privacy protection against eavesdroppers was accepted by *USENIX Security 2025*.  
 - **09/2024**: We successfully received funding from the Beijing Natural Science Foundation Undergraduate “QiYan” Program.  
 - **04/2024**: Our paper on audio adversarial attacks was accepted by *SecTL 2024 (AsiaCCS Workshop)*.
+
 
 Projects
 ======
