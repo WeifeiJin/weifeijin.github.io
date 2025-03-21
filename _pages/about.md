@@ -25,19 +25,19 @@ Publications
   Boosting the Transferability of Audio Adversarial Examples with Acoustic Representation Optimization
   </a>  
   *Weifei Jin, Junjie Su, Hejia Wang, Yulin Ye, Jie Hao.*  
-  To appear in *IEEE International Conference on Multimedia & Expo (ICME)*, 2025. Nantes, France.  
+  To appear in IEEE International Conference on Multimedia & Expo (ICME), 2025. 
 
 - <a href="#" target="_blank">
   Whispering Under the Eaves: Protecting User Privacy Against Commercial and LLM-powered Automatic Speech Recognition Systems
   </a>  
   *Weifei Jin, Yuxin Cao, Junjie Su, Derui Wang, Yedi Zhang, Minhui Xue, Jie Hao, Jin Song Dong, Yixian Yang.*  
-  To appear in the *34th USENIX Security Symposium (USENIX Security)*, 2025.  
+  To appear in the 34th USENIX Security Symposium (USENIX Security), 2025.  
 
 - <a href="https://arxiv.org/abs/2405.09470" target="_blank">
   Towards Evaluating the Robustness of Automatic Speech Recognition Systems via Audio Style Transfer
   </a>  
   *Weifei Jin, Yuxin Cao, Junjie Su, Qi Shen, Kai Ye, Derui Wang, Jie Hao, Ziyao Liu.*  
-  In the *2nd ACM Workshop on Secure and Trustworthy Deep Learning Systems (SecTL, AsiaCCS Workshop)*, 2024, pp. 47–55.
+  In the 2nd ACM Workshop on Secure and Trustworthy Deep Learning Systems (SecTL, AsiaCCS Workshop), 2024, pp. 47–55.
 
 News
 ======
