@@ -31,7 +31,7 @@ Publications
   MALSIGHT: Exploring Malicious Source Code and Benign Pseudocode for Iterative Binary Malware Summarization
   </a>  
   *Haolang Lu, Hongrui Peng, Guoshun Nan, Jiaoyang Cui, Cheng Wang, __Weifei Jin__, Songtao Wang, Shengli Pan, Xiaofeng Tao.*  
-  In *IEEE Transactions on Information Forensics and Security (TIFS)*, 2025.
+  In IEEE Transactions on Information Forensics and Security (TIFS), 2025.
 
 - <a href="#" target="_blank">
   Boosting the Transferability of Audio Adversarial Examples with Acoustic Representation Optimization
