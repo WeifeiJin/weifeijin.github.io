@@ -26,9 +26,9 @@ author_profile: true
       <li>
         <strong><a href="{{ post.paperurl }}" target="_blank">{{ post.title }}</a></strong><br>
         {% if post.citation %}
-          {{ post.citation | split: "." | first | markdownify }}<br>
+          {{ post.citation | split: "." | first }}<br>
         {% endif %}
-        {{ post.excerpt | strip_newlines | strip }}
+        {{ post.excerpt }}
       </li>
     {% endfor %}
     </ul>  <!-- End unordered list -->
@@ -39,9 +39,9 @@ author_profile: true
     <li>
       <strong><a href="{{ post.paperurl }}" target="_blank">{{ post.title }}</a></strong><br>
       {% if post.citation %}
-        {{ post.citation | split: "." | first | markdownify }}<br>
+        {{ post.citation | split: "." | first }}<br>
       {% endif %}
-      {{ post.excerpt | strip_newlines | strip }}
+      {{ post.excerpt }}
     </li>
   {% endfor %}
   </ul>  <!-- End unordered list -->
