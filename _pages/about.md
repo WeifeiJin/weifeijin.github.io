@@ -22,29 +22,43 @@ Publications
 ======
 
 - <a href="#" target="_blank">
+  ALMGuard: Safety Shortcuts and Where to Find Them as Guardrails for Audio–Language Models
+  </a>  
+  *__Weifei Jin__, Yuxin Cao, Junjie Su, Minhui Xue, Jie Hao, Ke Xu, Jin Song Dong, Derui Wang.*  
+  To appear in the Thirty-ninth Annual Conference on Neural Information Processing Systems (NeurIPS), 2025. 
+
+- <a href="#" target="_blank">
+  MALSIGHT: Exploring Malicious Source Code and Benign Pseudocode for Iterative Binary Malware Summarization
+  </a>  
+  *Haolang Lu, Hongrui Peng, Guoshun Nan, Jiaoyang Cui, Cheng Wang, __Weifei Jin__, Songtao Wang, Shengli Pan, Xiaofeng Tao.*  
+  In *IEEE Transactions on Information Forensics and Security (TIFS)*, 2025.
+
+- <a href="#" target="_blank">
   Boosting the Transferability of Audio Adversarial Examples with Acoustic Representation Optimization
   </a>  
-  *Weifei Jin, Junjie Su, Hejia Wang, Yulin Ye, Jie Hao.*  
-  To appear in IEEE International Conference on Multimedia & Expo (ICME), 2025. 
+  *__Weifei Jin__, Junjie Su, Hejia Wang, Yulin Ye, Jie Hao.*  
+  In IEEE International Conference on Multimedia & Expo (ICME), 2025. 
 
 - <a href="#" target="_blank">
   Whispering Under the Eaves: Protecting User Privacy Against Commercial and LLM-powered Automatic Speech Recognition Systems
   </a>  
-  *Weifei Jin, Yuxin Cao, Junjie Su, Derui Wang, Yedi Zhang, Minhui Xue, Jie Hao, Jin Song Dong, Yixian Yang.*  
-  To appear in the 34th USENIX Security Symposium (USENIX Security), 2025.  
+  *__Weifei Jin__, Yuxin Cao, Junjie Su, Derui Wang, Yedi Zhang, Minhui Xue, Jie Hao, Jin Song Dong, Yixian Yang.*  
+  In the 34th USENIX Security Symposium (USENIX Security), 2025.  
 
 - <a href="https://arxiv.org/abs/2405.09470" target="_blank">
   Towards Evaluating the Robustness of Automatic Speech Recognition Systems via Audio Style Transfer
   </a>  
-  *Weifei Jin, Yuxin Cao, Junjie Su, Qi Shen, Kai Ye, Derui Wang, Jie Hao, Ziyao Liu.*  
+  *__Weifei Jin__, Yuxin Cao, Junjie Su, Qi Shen, Kai Ye, Derui Wang, Jie Hao, Ziyao Liu.*  
   In the 2nd ACM Workshop on Secure and Trustworthy Deep Learning Systems (SecTL, AsiaCCS Workshop), 2024, pp. 47–55.
 
 News
 ======
-- **03/2025**: Our paper on boosting the transferability of audio adversarial examples was accepted by *ICME 2025*.  
-- **01/2025**: Our paper on speech privacy protection against eavesdroppers was accepted by *USENIX Security 2025*.  
+- **09/2025**: One first-author paper on protecting audio-language models against jailbreaks was accepted to *NeurIPS 2025*.
+- **06/2025**: One co-authored paper on iterative binary malware summarization was accepted to *IEEE Transactions on Information Forensics and Security (TIFS)*.
+- **03/2025**: One first-author paper on boosting the transferability of audio adversarial examples was accepted to *ICME 2025*.  
+- **01/2025**: One first-author paper on speech privacy protection against eavesdroppers was accepted to *USENIX Security 2025*.  
 - **09/2024**: We successfully received funding from the Beijing Natural Science Foundation Undergraduate “QiYan” Program.  
-- **04/2024**: Our paper on audio adversarial attacks was accepted by *SecTL 2024 (AsiaCCS Workshop)*.
+- **04/2024**: One first-author paper on audio adversarial attacks was accepted to *SecTL 2024 (AsiaCCS Workshop)*.
 
 
 Projects
@@ -61,13 +75,14 @@ Projects
 
 Awards
 ======
+- **Individual Award Representative**, 2024-2025 BUPT Student Commendation Conference, BUPT (Top 0.1%, 2025)
 - **Second-Class Scholarship**, Beijing University of Posts and Telecommunications (2024)  
 - **“Merit Student”**, Beijing University of Posts and Telecommunications (2024)  
 - **Second Prize**, 9th National Cryptography Technology Competition (2024)  
-- **Rank 1st** in GPA in the major for two consecutive academic years  
+- **Rank 1st** in GPA in the major for three consecutive academic years  
 
 Services
 ======
-- **Academic Reviewing**: Served as a reviewer for ICME 2025, WWW 2024.
+- **Academic Reviewing**: Served as a reviewer for TDSC, ICME 2025.
 - **Mentoring**: Guided junior students in Cyberspace Security projects focusing on adversarial attacks.
 
