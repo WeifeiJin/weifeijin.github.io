@@ -24,13 +24,11 @@ author_profile: true
         {% assign title_shown = true %}
       {% endunless %}
       <li>
-        <strong><a href="{{ post.paperurl }}" target="_blank">{{ post.title }}</a></strong>
-        <p>
-          {% if post.citation %}
-            {{ post.citation | split: "." | first | markdownify }}<br>
-          {% endif %}
-          {{ post.excerpt }}
-        </p>
+        <strong><a href="{{ post.paperurl }}" target="_blank">{{ post.title }}</a></strong><br>
+        {% if post.citation %}
+          {{ post.citation | split: "." | first | markdownify }}<br>
+        {% endif %}
+        {{ post.excerpt }}
       </li>
     {% endfor %}
     </ul>  <!-- End unordered list -->
@@ -39,13 +37,11 @@ author_profile: true
   <ul>  <!-- Start unordered list -->
   {% for post in site.publications reversed %}
     <li>
-      <strong><a href="{{ post.paperurl }}" target="_blank">{{ post.title }}</a></strong>
-      <p>
-        {% if post.citation %}
-          {{ post.citation | split: "." | first | markdownify }}<br>
-        {% endif %}
-        {{ post.excerpt }}
-      </p>
+      <strong><a href="{{ post.paperurl }}" target="_blank">{{ post.title }}</a></strong><br>
+      {% if post.citation %}
+        {{ post.citation | split: "." | first | markdownify }}<br>
+      {% endif %}
+      {{ post.excerpt }}
     </li>
   {% endfor %}
   </ul>  <!-- End unordered list -->
