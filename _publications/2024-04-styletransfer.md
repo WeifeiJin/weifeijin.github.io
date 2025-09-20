@@ -8,7 +8,7 @@ date: 2024-04-01
 venue: "SecTL 2024 (AsiaCCS Workshop)"
 paperurl: "https://arxiv.org/abs/2405.09470"
 citation: |
-  Weifei Jin, Yuxin Cao, Junjie Su, Qi Shen, Kai Ye, Derui Wang, Jie Hao, 
+  **Weifei Jin**, Yuxin Cao, Junjie Su, Qi Shen, Kai Ye, Derui Wang, Jie Hao, 
   and Ziyao Liu. 2024. 
   "Towards Evaluating the Robustness of Automatic Speech Recognition Systems via Audio Style Transfer." 
   In the 2nd ACM Workshop on Secure and Trustworthy Deep Learning Systems (SecTL, AsiaCCS Workshop), pp. 47–55.
