@@ -27,19 +27,19 @@ Publications
   *__Weifei Jin__, Yuxin Cao, Junjie Su, Minhui Xue, Jie Hao, Ke Xu, Jin Song Dong, Derui Wang.*  
   To appear in the Thirty-ninth Annual Conference on Neural Information Processing Systems (NeurIPS), 2025. 
 
-- <a href="#" target="_blank">
+- <a href="https://arxiv.org/abs/2406.18379" target="_blank">
   MALSIGHT: Exploring Malicious Source Code and Benign Pseudocode for Iterative Binary Malware Summarization
   </a>  
   *Haolang Lu, Hongrui Peng, Guoshun Nan, Jiaoyang Cui, Cheng Wang, __Weifei Jin__, Songtao Wang, Shengli Pan, Xiaofeng Tao.*  
   In IEEE Transactions on Information Forensics and Security (TIFS), 2025.
 
-- <a href="#" target="_blank">
+- <a href="https://arxiv.org/abs/2503.19591" target="_blank">
   Boosting the Transferability of Audio Adversarial Examples with Acoustic Representation Optimization
   </a>  
   *__Weifei Jin__, Junjie Su, Hejia Wang, Yulin Ye, Jie Hao.*  
   In IEEE International Conference on Multimedia & Expo (ICME), 2025. 
 
-- <a href="#" target="_blank">
+- <a href="https://www.usenix.org/system/files/conference/usenixsecurity25/sec25cycle1-prepub-743-jin-weifei.pdf" target="_blank">
   Whispering Under the Eaves: Protecting User Privacy Against Commercial and LLM-powered Automatic Speech Recognition Systems
   </a>  
   *__Weifei Jin__, Yuxin Cao, Junjie Su, Derui Wang, Yedi Zhang, Minhui Xue, Jie Hao, Jin Song Dong, Yixian Yang.*  
