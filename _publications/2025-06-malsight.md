@@ -1,7 +1,7 @@
 ---
 title: "MALSIGHT: Exploring Malicious Source Code and Benign Pseudocode for Iterative Binary Malware Summarization"
 collection: publications
-category: journals
+category: conferences
 permalink: /publication/2025-tifs-malsight
 excerpt: "In IEEE Transactions on Information Forensics and Security (TIFS), 2025."
 date: 2025-06-01
