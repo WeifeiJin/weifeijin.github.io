@@ -15,4 +15,4 @@ citation: |
 
 Boosting the Transferability of Audio Adversarial Examples with Acoustic Representation Optimization.
 
-This paper is to appear in the IEEE International Conference on Multimedia & Expo (ICME), 2025, Nantes, France.
+Published in the IEEE International Conference on Multimedia & Expo (ICME), 2025, Nantes, France.

@@ -16,4 +16,4 @@ citation: |
 
 Whispering Under the Eaves: Protecting User Privacy Against Commercial and LLM-powered Automatic Speech Recognition Systems.
 
-This paper is to appear in the 34th USENIX Security Symposium (USENIX Security), 2025.
+Published in the 34th USENIX Security Symposium (USENIX Security), 2025.
