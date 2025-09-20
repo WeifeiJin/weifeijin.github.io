@@ -28,7 +28,7 @@ author_profile: true
         {% if post.citation %}
           {{ post.citation | split: "." | first | markdownify }}<br>
         {% endif %}
-        {{ post.excerpt }}
+        {{ post.excerpt | markdownify | strip_html }}
       </li>
     {% endfor %}
     </ul>  <!-- End unordered list -->
@@ -41,7 +41,7 @@ author_profile: true
       {% if post.citation %}
         {{ post.citation | split: "." | first | markdownify }}<br>
       {% endif %}
-      {{ post.excerpt }}
+      {{ post.excerpt | markdownify | strip_html }}
     </li>
   {% endfor %}
   </ul>  <!-- End unordered list -->
