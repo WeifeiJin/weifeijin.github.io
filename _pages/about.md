@@ -8,12 +8,21 @@ redirect_from:
   - /about.html
 ---
 
-I'm an undergraduate student majoring in Cyberspace Security (Experimental Class) at 
-[Beijing University of Posts and Telecommunications (BUPT)](https://www.bupt.edu.cn/).
-My research interests lie in **Trustworthy AI**, **Adversarial Machine Learning**, and **Speech Security**.
-I have been working under the supervision of [Prof. Jie Hao](https://scss.bupt.edu.cn/info/1063/3808.htm) in the [National Engineering Research Center of Disaster Backup and Recovery](http://www.zaibei.org.cn/).
-I also collaborate closely with [Dr. Yuxin Cao](https://yuxincao22.github.io/) (from [NUS](https://www.comp.nus.edu.sg/)).
+I am an undergraduate student majoring in Cyberspace Security (Experimental Class) at 
+Beijing University of Posts and Telecommunications (BUPT), advised by [Prof. Jie Hao](https://scss.bupt.edu.cn/info/1063/3808.htm). 
 
+Currently, I am a Research Intern at **Duke University**, advised by [Prof. Neil Gong](https://www.cs.duke.edu/~neilgong/). 
+Previously, I was fortunate to be advised by [Prof. Ke Xu](https://www.cs.tsinghua.edu.cn/csen/info/1062/4050.htm) at **Tsinghua University**. 
+I also collaborate closely with [Dr. Yuxin Cao](https://yuxincao22.github.io/) (from National University of Singapore).
+
+Research Interests
+======
+My research vision is to build **secure, trustworthy, and robust AI systems** capable of navigating the physical world. I systematically address vulnerabilities across the agent's expanding capability stack:
+
+* **Perception ("The Ears"):** Defending against input-level manipulation in multimodal perception, exploring modal-agnostic adversarial robustness beyond just the audio domain.
+* **Cognition ("The Brain"):** Mitigating model-level exploits and ensuring safety alignment in Multimodal Large Language Models (MLLMs) and autonomous AI Agents.
+* **Memory ("The Knowledge"):** Protecting Retrieval-Augmented Generation (RAG) systems and external knowledge bases from context-level injection and poisoning.
+[//]: # (My research interests lie in **Trustworthy AI**, **Agent Safety**, and **Multimodal Security**.)
 [//]: # (and [Dr. Derui Wang]&#40;https://neuralsec.github.io/&#41; &#40;from [CSIRO's Data61]&#40;https://www.csiro.au/en/research/technology-space?start=0&count=12&#41;&#41;.)
 
 If you would like to learn more about my work, feel free to check out my recent publications below or contact me directly.
@@ -21,7 +30,7 @@ If you would like to learn more about my work, feel free to check out my recent 
 Publications
 ======
 
-- <a href="#" target="_blank">
+- <a href="https://arxiv.org/abs/2510.26096" target="_blank">
   ALMGuard: Safety Shortcuts and Where to Find Them as Guardrails for Audio–Language Models
   </a>  
   *__Weifei Jin__, Yuxin Cao, Junjie Su, Minhui Xue, Jie Hao, Ke Xu, Jin Song Dong, Derui Wang.*  
@@ -53,36 +62,26 @@ Publications
 
 News
 ======
+- **09/2025**: I was awarded the **Xiaomi Grand Prize Scholarship** (the highest scholarship at BUPT, awarded to only **5** among all undergraduates).
 - **09/2025**: One first-author paper on protecting audio-language models against jailbreaks was accepted to *NeurIPS 2025*.
-- **06/2025**: One co-authored paper on iterative binary malware summarization was accepted to *IEEE Transactions on Information Forensics and Security (TIFS)*.
+- **06/2025**: One co-authored paper on iterative binary malware summarization was accepted to *IEEE TIFS*.
 - **03/2025**: One first-author paper on boosting the transferability of audio adversarial examples was accepted to *ICME 2025*.  
 - **01/2025**: One first-author paper on speech privacy protection against eavesdroppers was accepted to *USENIX Security 2025*.  
 - **09/2024**: We successfully received funding from the Beijing Natural Science Foundation Undergraduate “QiYan” Program.  
 - **04/2024**: One first-author paper on audio adversarial attacks was accepted to *SecTL 2024 (AsiaCCS Workshop)*.
 
 
-Projects
-======
-**Beijing Natural Science Foundation Undergraduate “QiYan” Program** (2024–2026, expected)  
-- Principal Investigator
-- Focused on leveraging latent space features for adversarial perturbations on automatic speech recognition (ASR) systems  
-- Aim to enhance the security and robustness of ASR through novel defense and attack methodologies
-
-**National Undergraduate Innovation and Entrepreneurship Training Program** (Jun 2023 – May 2024)  
-- Core Member in a national-level research project  
-- Focused on adversarial attacks and defenses in speech recognition based on style transfer  
-- Led the publication of an adversarial attack paper at *SecTL 2024*
-
 Awards
 ======
+- **Xiaomi Grand Prize Scholarship**, (Highest scholarship in BUPT, Top 0.01%, 2025)
 - **Individual Award Representative**, 2024-2025 BUPT Student Commendation Conference, BUPT (Top 0.1%, 2025)
-- **Second-Class Scholarship**, Beijing University of Posts and Telecommunications (2024)  
-- **“Merit Student”**, Beijing University of Posts and Telecommunications (2024)  
-- **Second Prize**, 9th National Cryptography Technology Competition (2024)  
-- **Rank 1st** in GPA in the major for three consecutive academic years  
+- **Outstanding Student Leader Award**, BUPT (2025)
+- **“Merit Student”**, BUPT (2024)  
+- **Second Prize**, 9th National Cryptography Technology Competition (2024)
+
 
 Services
 ======
-- **Academic Reviewing**: Served as a reviewer for TDSC, ICME 2025.
-- **Mentoring**: Guided junior students in Cyberspace Security projects focusing on adversarial attacks.
+- **Academic Reviewing**: Served as a reviewer for TDSC, ICASSP 2026, ICME 2025.
+- **Mentoring**: Guided junior students in Cyberspace Security projects focusing on trustworthy Audio-Language Models.
 
