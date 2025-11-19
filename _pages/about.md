@@ -27,6 +27,17 @@ My research vision is to build **secure, trustworthy, and robust AI systems** ca
 
 If you would like to learn more about my work, feel free to check out my recent publications below or contact me directly.
 
+News
+======
+- **09/2025**: I was awarded the **Xiaomi Grand Prize Scholarship** (the highest scholarship at BUPT, awarded to only **5** among all undergraduates).
+- **09/2025**: One first-author paper on protecting audio-language models against jailbreaks was accepted to *NeurIPS 2025*.
+- **06/2025**: One co-authored paper on iterative binary malware summarization was accepted to *IEEE TIFS*.
+- **03/2025**: One first-author paper on boosting the transferability of audio adversarial examples was accepted to *ICME 2025*.  
+- **01/2025**: One first-author paper on speech privacy protection against eavesdroppers was accepted to *USENIX Security 2025*.  
+- **09/2024**: We successfully received funding from the Beijing Natural Science Foundation Undergraduate “QiYan” Program.  
+- **04/2024**: One first-author paper on audio adversarial attacks was accepted to *SecTL 2024 (AsiaCCS Workshop)*.
+
+
 Publications
 ======
 
@@ -59,16 +70,6 @@ Publications
   </a>  
   *__Weifei Jin__, Yuxin Cao, Junjie Su, Qi Shen, Kai Ye, Derui Wang, Jie Hao, Ziyao Liu.*  
   In the 2nd ACM Workshop on Secure and Trustworthy Deep Learning Systems (SecTL, AsiaCCS Workshop), 2024, pp. 47–55.
-
-News
-======
-- **09/2025**: I was awarded the **Xiaomi Grand Prize Scholarship** (the highest scholarship at BUPT, awarded to only **5** among all undergraduates).
-- **09/2025**: One first-author paper on protecting audio-language models against jailbreaks was accepted to *NeurIPS 2025*.
-- **06/2025**: One co-authored paper on iterative binary malware summarization was accepted to *IEEE TIFS*.
-- **03/2025**: One first-author paper on boosting the transferability of audio adversarial examples was accepted to *ICME 2025*.  
-- **01/2025**: One first-author paper on speech privacy protection against eavesdroppers was accepted to *USENIX Security 2025*.  
-- **09/2024**: We successfully received funding from the Beijing Natural Science Foundation Undergraduate “QiYan” Program.  
-- **04/2024**: One first-author paper on audio adversarial attacks was accepted to *SecTL 2024 (AsiaCCS Workshop)*.
 
 
 Awards
