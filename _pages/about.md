@@ -22,6 +22,7 @@ My research vision is to build **secure, trustworthy, and robust AI systems** ca
 * **Perception ("The Ears"):** Defending against input-level manipulation in multimodal perception, exploring modal-agnostic adversarial robustness beyond just the audio domain.
 * **Cognition ("The Brain"):** Mitigating model-level exploits and ensuring safety alignment in Multimodal Large Language Models (MLLMs) and autonomous AI Agents.
 * **Memory ("The Knowledge"):** Protecting Retrieval-Augmented Generation (RAG) systems and external knowledge bases from context-level injection and poisoning.
+
 [//]: # (My research interests lie in **Trustworthy AI**, **Agent Safety**, and **Multimodal Security**.)
 [//]: # (and [Dr. Derui Wang]&#40;https://neuralsec.github.io/&#41; &#40;from [CSIRO's Data61]&#40;https://www.csiro.au/en/research/technology-space?start=0&count=12&#41;&#41;.)
 
