@@ -16,7 +16,7 @@ I also collaborate closely with [Dr. Yuxin Cao](https://yuxincao22.github.io/) (
 
 Research Interests
 ======
-My research vision is to build **secure, trustworthy, and robust AI systems** capable of navigating the physical world. I systematically address vulnerabilities across the agent's expanding capability stack:
+My research vision is to build **secure, trustworthy, and robust AI systems** capable of interacting with the physical world. I systematically address vulnerabilities across the AI's expanding capability stack:
 
 * **Perception ("The Ears"):** Defending against input-level manipulation in multimodal perception, exploring modal-agnostic adversarial robustness beyond just the audio domain.
 * **Cognition ("The Brain"):** Mitigating model-level exploits and ensuring safety alignment in Multimodal Large Language Models (MLLMs) and autonomous AI Agents.
