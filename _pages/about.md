@@ -9,7 +9,7 @@ redirect_from:
 ---
 
 I am an undergraduate student majoring in Cyberspace Security (Experimental Class) at 
-Beijing University of Posts and Telecommunications (BUPT), advised by [Prof. Jie Hao](https://scss.bupt.edu.cn/info/1063/3808.htm). 
+**Beijing University of Posts and Telecommunications (BUPT)**, advised by [Prof. Jie Hao](https://scss.bupt.edu.cn/info/1063/3808.htm). 
 
 Currently, I am a Research Intern at **Duke University**, advised by [Prof. Neil Gong](https://www.cs.duke.edu/~neilgong/). 
 Previously, I was fortunate to be advised by [Prof. Ke Xu](https://www.cs.tsinghua.edu.cn/csen/info/1062/4050.htm) at **Tsinghua University**. 
@@ -77,7 +77,7 @@ Awards
 - **Xiaomi Grand Prize Scholarship**, (Highest scholarship in BUPT, Top 0.01%, 2025)
 - **Individual Award Representative**, 2024-2025 BUPT Student Commendation Conference, BUPT (Top 0.1%, 2025)
 - **Outstanding Student Leader Award**, BUPT (2025)
-- **“Merit Student”**, BUPT (2024)  
+- **Merit Student**, BUPT (2024)  
 - **Second Prize**, 9th National Cryptography Technology Competition (2024)
 
 
