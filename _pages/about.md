@@ -29,6 +29,8 @@ If you would like to learn more about my work, feel free to check out my recent 
 
 News
 ======
+- **11/2025**: I will serve as a reviewer for ICME 2026.
+- **10/2025**: I will serve as a reviewer for ICASSP 2026.
 - **09/2025**: I was awarded the **Xiaomi Grand Prize Scholarship** (the highest scholarship at BUPT, awarded to only **5** among all undergraduates).
 - **09/2025**: One first-author paper on protecting audio-language models against jailbreaks was accepted to *NeurIPS 2025*.
 - **06/2025**: One co-authored paper on iterative binary malware summarization was accepted to *IEEE TIFS*.
@@ -83,6 +85,6 @@ Awards
 
 Services
 ======
-- **Academic Reviewing**: Served as a reviewer for TDSC, ICASSP 2026, ICME 2025.
+- **Academic Reviewing**: Served as a reviewer for TDSC, ICASSP 2026, ICME 2026/2025.
 - **Mentoring**: Guided junior students in Cyberspace Security projects focusing on trustworthy Audio-Language Models.
 
