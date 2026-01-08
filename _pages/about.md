@@ -11,6 +11,7 @@ redirect_from:
 I am an undergraduate student majoring in Cyberspace Security (Experimental Class) at 
 **Beijing University of Posts and Telecommunications (BUPT)**, advised by [Prof. Jie Hao](https://scholar.google.com/citations?user=z26c40QAAAAJ).
 Currently, I am a Research Intern at **Duke University**, advised by [Prof. Neil Gong](https://people.duke.edu/~zg70/). 
+Starting in February 2026, I will join **ByteDance** as an AI Security Research Intern (Flow Team) to work on LLM and Agent security.
 Previously, I was fortunate to be advised by [Prof. Ke Xu](https://scholar.google.com/citations?user=_XXLtZgAAAAJ) at **Tsinghua University**. 
 I also collaborate closely with [Dr. Yuxin Cao](https://yuxincao22.github.io/) (from National University of Singapore).
 
@@ -29,6 +30,7 @@ If you would like to learn more about my work, feel free to check out my recent 
 
 News
 ======
+- **01/2026**: I will join ByteDance (Flow Team) as an AI Security Research Intern in February 2026, focusing on the security and safety of large-scale AI applications.
 - **11/2025**: I will serve as a reviewer for ICME 2026.
 - **10/2025**: I will serve as a reviewer for ICASSP 2026.
 - **09/2025**: I was awarded the **Xiaomi Grand Prize Scholarship** (the highest scholarship at BUPT, awarded to only **5** among all undergraduates).
