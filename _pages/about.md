@@ -77,7 +77,7 @@ Publications
 
 Invited Talks
 =====
-- **From Research to Researcher: Execution, Cognition, and Mindset** (mainly in Chinese). School of Cybersecurity, BUPT. 01/2026. [[Slides]](/files/From_Research_to_Researcher_WeifeiJin.pdf)
+- **From Research to Researcher: Execution, Cognition, and Mindset** (mainly in Chinese). School of Cyberspace security, BUPT. 01/2026. [[Slides]](/files/From_Research_to_Researcher_WeifeiJin.pdf) [[Video]](https://drive.google.com/file/d/1M3V-lI7HhHJI88WJ3YGFOEVBWW1pYFMn/view?usp=sharing)
 
 Awards
 ======
