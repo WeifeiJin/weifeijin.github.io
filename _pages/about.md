@@ -75,6 +75,9 @@ Publications
   *__Weifei Jin__, Yuxin Cao, Junjie Su, Qi Shen, Kai Ye, Derui Wang, Jie Hao, Ziyao Liu.*  
   In the 2nd ACM Workshop on Secure and Trustworthy Deep Learning Systems (SecTL, AsiaCCS Workshop), 2024, pp. 47–55.
 
+Invited Talks
+=====
+- **From Research to Researcher: Execution, Cognition, and Mindset** (mainly in Chinese). School of Cybersecurity, BUPT. 01/2026. [[Slides]](/files/From_Research_to_Researcher_WeifeiJin.pdf) [[Video]](/files/From_Research_to_Researcher.mp4)
 
 Awards
 ======
