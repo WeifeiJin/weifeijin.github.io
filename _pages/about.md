@@ -49,7 +49,7 @@ Publications
 - <a href="https://arxiv.org/abs/2601.12786" target="_blank">
   DUAP: Dual-task Universal Adversarial Perturbations Against Voice Control Systems
   </a>
-  *Suyang Sun, __Weifei Jin__, Yuxin Cao, Wei Song, Jie Hao.*
+  *Suyang Sun, __Weifei Jin__, Yuxin Cao, Wei Song, Jie Hao.*  
   To appear in IEEE International Conference on Multimedia & Expo (ICME), 2026.
 
 - <a href="https://arxiv.org/abs/2510.26096" target="_blank">
