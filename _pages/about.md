@@ -8,11 +8,9 @@ redirect_from:
   - /about.html
 ---
 
-I am an undergraduate student majoring in Cyberspace Security (Experimental Class) at 
-**Beijing University of Posts and Telecommunications (BUPT)**, advised by [Prof. Jie Hao](https://scholar.google.com/citations?user=z26c40QAAAAJ).
-Currently, I am an AI Security Research Intern at **ByteDance** (SecurityFlow Team) to work on LLM and Agent security.
-I am also a Research Intern at **Duke University**, advised by [Prof. Neil Gong](https://people.duke.edu/~zg70/).
-Previously, I was fortunate to be advised by [Prof. Ke Xu](https://scholar.google.com/citations?user=_XXLtZgAAAAJ) at **Tsinghua University**. 
+I am a Ph.D. student at **Duke University**, advised by [Prof. Neil Gong](https://people.duke.edu/~zg70/).
+I previously worked as an AI Security Research Intern at **ByteDance** (SecurityFlow Team), focusing on LLM and Agent security.
+I was also fortunate to be advised by [Prof. Ke Xu](https://scholar.google.com/citations?user=_XXLtZgAAAAJ) at **Tsinghua University**. 
 I also collaborate closely with [Dr. Yuxin Cao](https://yuxincao22.github.io/) (from National University of Singapore).
 
 Research Interests
@@ -34,12 +32,11 @@ News
 - **02/2026**: I joined ByteDance (SecurityFlow Team) as an AI Security Research Intern, focusing on the security and safety of large-scale AI applications.
 - **11/2025**: I will serve as a reviewer for ICME 2026.
 - **10/2025**: I will serve as a reviewer for ICASSP 2026.
-- **09/2025**: I was awarded the **Xiaomi Grand Prize Scholarship** (the highest scholarship at BUPT, awarded to only **5** among all undergraduates).
+- **09/2025**: I was awarded the **Xiaomi Grand Prize Scholarship**.
 - **09/2025**: One first-author paper on protecting audio-language models against jailbreaks was accepted to *NeurIPS 2025*.
 - **06/2025**: One co-authored paper on iterative binary malware summarization was accepted to *IEEE TIFS*.
 - **03/2025**: One first-author paper on boosting the transferability of audio adversarial examples was accepted to *ICME 2025*.  
 - **01/2025**: One first-author paper on speech privacy protection against eavesdroppers was accepted to *USENIX Security 2025*.  
-- **09/2024**: We successfully received funding from the Beijing Natural Science Foundation Undergraduate “QiYan” Program.  
 - **04/2024**: One first-author paper on audio adversarial attacks was accepted to *SecTL 2024 (AsiaCCS Workshop)*.
 
 
@@ -82,21 +79,12 @@ Publications
   *__Weifei Jin__, Yuxin Cao, Junjie Su, Qi Shen, Kai Ye, Derui Wang, Jie Hao, Ziyao Liu.*  
   In the 2nd ACM Workshop on Secure and Trustworthy Deep Learning Systems (SecTL, AsiaCCS Workshop), 2024, pp. 47–55.
 
-Invited Talks
-=====
-- **From Research to Researcher: Execution, Cognition, and Mindset** (mainly in Chinese). School of Cyberspace security, BUPT. 01/2026. [[Slides]](/files/From_Research_to_Researcher_WeifeiJin.pdf) [[Video]](https://drive.google.com/file/d/1M3V-lI7HhHJI88WJ3YGFOEVBWW1pYFMn/view?usp=sharing)
-
 Awards
 ======
-- **Xiaomi Grand Prize Scholarship**, (Highest scholarship in BUPT, Top 0.01%, 2025)
-- **Individual Award Representative**, 2024-2025 BUPT Student Commendation Conference, BUPT (Top 0.1%, 2025)
-- **Outstanding Student Leader Award**, BUPT (2025)
-- **Merit Student**, BUPT (2024)  
+- **Xiaomi Grand Prize Scholarship** (2025)
 - **Second Prize**, 9th National Cryptography Technology Competition (2024)
-
 
 Services
 ======
 - **Academic Reviewing**: Served as a reviewer for TDSC, ICASSP 2026, ICME 2026/2025.
-- **Mentoring**: Guided junior students in Cyberspace Security projects focusing on trustworthy Audio-Language Models.
-
+- **Mentoring**: Guided junior students on projects focusing on trustworthy Audio-Language Models.
