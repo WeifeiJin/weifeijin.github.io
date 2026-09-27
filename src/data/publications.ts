@@ -5,7 +5,6 @@ export interface Publication {
   authors: string[];
   venue: string;
   paper?: string;
-  topic?: string;
   selectedAt?: string;
 }
 
@@ -15,7 +14,7 @@ export const publications: Publication[] = [
     title: 'CrossSteer: Cross-Modal Safety Steering for Audio-Language Models',
     authors: ['Houde Dong', 'Weifei Jin', 'Yuxin Cao', 'Wei Song', 'Derui Wang', 'Jie Hao'],
     venue: 'NeurIPS 2026',
-    topic: 'Audio-Language Model Safety', selectedAt: '2026-09',
+    selectedAt: '2026-09',
   },
   {
     slug: '2026-icme-duap', year: 2026,
@@ -28,7 +27,7 @@ export const publications: Publication[] = [
     title: 'ALMGuard: Safety Shortcuts and Where to Find Them as Guardrails for Audio–Language Models',
     authors: ['Weifei Jin', 'Yuxin Cao', 'Junjie Su', 'Minhui Xue', 'Jie Hao', 'Ke Xu', 'Jin Song Dong', 'Derui Wang'],
     venue: 'NeurIPS 2025', paper: 'https://arxiv.org/abs/2510.26096',
-    topic: 'Audio-Language Model Safety', selectedAt: '2025-09',
+    selectedAt: '2025-09',
   },
   {
     slug: '2025-tifs-malsight', year: 2025,
@@ -41,14 +40,13 @@ export const publications: Publication[] = [
     title: 'Boosting the Transferability of Audio Adversarial Examples with Acoustic Representation Optimization',
     authors: ['Weifei Jin', 'Junjie Su', 'Hejia Wang', 'Yulin Ye', 'Jie Hao'],
     venue: 'ICME 2025', paper: 'https://arxiv.org/abs/2503.19591',
-    topic: 'Adversarial Machine Learning',
   },
   {
     slug: '2025-usenix-whispering', year: 2025,
     title: 'Whispering Under the Eaves: Protecting User Privacy Against Commercial and LLM-powered Automatic Speech Recognition Systems',
     authors: ['Weifei Jin', 'Yuxin Cao', 'Junjie Su', 'Derui Wang', 'Yedi Zhang', 'Minhui Xue', 'Jie Hao', 'Jin Song Dong', 'Yixian Yang'],
     venue: 'USENIX Security 2025', paper: 'https://www.usenix.org/system/files/conference/usenixsecurity25/sec25cycle1-prepub-743-jin-weifei.pdf',
-    topic: 'Speech Privacy & Adversarial Robustness', selectedAt: '2025-01',
+    selectedAt: '2025-01',
   },
   {
     slug: '2024-sectl-styletransfer', year: 2024,

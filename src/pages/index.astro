@@ -30,7 +30,6 @@ import { selectedPublications } from '../data/publications';
         <li class="selected-item">
           <span class="selected-venue">{publication.venue}</span>
           <div class="selected-copy">
-            <p class="selected-topic">{publication.topic}</p>
             <h3><a href={'/publication/' + publication.slug + '/'}>{publication.title}</a></h3>
             <p class="selected-authors">{publication.authors.map((author, index) => <><span>{author === 'Weifei Jin' ? <strong>{author}</strong> : author}</span>{index < publication.authors.length - 1 ? ', ' : ''}</>)}</p>
           </div>
@@ -49,7 +48,7 @@ import { selectedPublications } from '../data/publications';
       </div>
       <div class="recognition-block">
         <h2>Service</h2>
-        <p>Reviewer for TDSC, ICASSP 2026, and ICME 2026/2025.</p>
+        <p>Reviewer for NeurIPS 2026, ICASSP 2026–2027, ICME 2025–2026, and IEEE TDSC.</p>
       </div>
       <div class="recognition-block">
         <h2>Mentoring</h2>
