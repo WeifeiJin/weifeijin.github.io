@@ -2,27 +2,49 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import ResearchAreas from '../components/ResearchAreas.astro';
-import PublicationCard from '../components/PublicationCard.astro';
 import NewsList from '../components/NewsList.astro';
 import { selectedPublications } from '../data/publications';
-import { profile } from '../data/profile';
 
 ---
 
 <BaseLayout>
   <Hero />
-  <section id="about" class="section about-home" aria-labelledby="about-title">
+  <ResearchAreas />
+
+  <section class="section selected-section" aria-labelledby="selected-title">
     <div class="section-heading">
-      <div><p class="eyebrow">ABOUT</p><h2 id="about-title">The person behind the work</h2></div>
-      <p class="section-description">Research grows through careful questions and close collaboration.</p>
+      <h2 id="selected-title">Selected work</h2>
     </div>
-    <div class="about-home-grid">
-      <div class="about-home-bio">
-        <p>I am a Ph.D. student at <strong>Duke University</strong>, advised by <a href={profile.advisor} target="_blank" rel="noopener noreferrer">Prof. Neil Gong</a>. My research focuses on secure, trustworthy, and robust AI systems, from multimodal perception to autonomous agents and external memory.</p>
-        <p>I previously worked as an AI Security Research Intern with the <strong>ByteDance SecurityFlow Team</strong>, focusing on LLM and agent security. I was also advised by <a href={profile.formerAdvisor} target="_blank" rel="noopener noreferrer">Prof. Ke Xu</a> at <strong>Tsinghua University</strong>, and I collaborate closely with <a href={profile.collaborator} target="_blank" rel="noopener noreferrer">Dr. Yuxin Cao</a> at the National University of Singapore.</p>
-        <a class="section-more" href={'mailto:' + profile.email}>Get in touch <span aria-hidden="true">↗</span></a>
+    <ol class="selected-list">
+      {selectedPublications.map((publication) => (
+        <li class="selected-item">
+          <span class="selected-venue">{publication.venue}</span>
+          <div class="selected-copy">
+            <p class="selected-topic">{publication.topic}</p>
+            <h3><a href={'/publication/' + publication.slug + '/'}>{publication.title}</a></h3>
+            <p class="selected-authors">{publication.authors.join(', ')}</p>
+          </div>
+          <a class="selected-paper" href={publication.paper} target="_blank" rel="noopener noreferrer" aria-label={'Read paper: ' + publication.title}>Paper <span aria-hidden="true">↗</span></a>
+        </li>
+      ))}
+    </ol>
+    <a class="section-more" href="/publications/">View all publications <span aria-hidden="true">→</span></a>
+  </section>
+
+  <section id="news" class="section updates-section" aria-labelledby="news-title">
+    <div class="section-heading">
+      <h2 id="news-title">Updates &amp; recognition</h2>
+    </div>
+    <div class="updates-grid">
+      <div>
+        <h3 class="updates-label">News</h3>
+        <NewsList limit={5} />
+        <details class="older-news">
+          <summary class="section-more">Earlier updates <span aria-hidden="true">⌄</span></summary>
+          <NewsList offset={5} />
+        </details>
       </div>
-      <div class="about-home-details">
+      <aside class="recognition" aria-label="Awards and service">
         <div class="about-side-section">
           <h3>Awards</h3>
           <ul class="plain-list"><li><span>2025</span> Xiaomi Grand Prize Scholarship</li><li><span>2024</span> Second Prize, 9th National Cryptography Technology Competition</li></ul>
@@ -31,31 +53,7 @@ import { profile } from '../data/profile';
           <h3>Service &amp; mentoring</h3>
           <p>Reviewer for TDSC, ICASSP 2026, and ICME 2026/2025. I have also mentored junior students working on trustworthy audio-language models.</p>
         </div>
-      </div>
+      </aside>
     </div>
-  </section>
-  <ResearchAreas />
-
-  <section class="section selected-section" aria-labelledby="selected-title">
-    <div class="section-heading">
-      <div><p class="eyebrow">SELECTED WORK</p><h2 id="selected-title">Research in focus</h2></div>
-      <p class="section-description">Recent work on audio-language safety, speech privacy, and adversarial robustness.</p>
-    </div>
-    <div class="selected-grid">
-      {selectedPublications.map((publication) => <PublicationCard publication={publication} />)}
-    </div>
-    <a class="section-more" href="/publications/">View all publications <span aria-hidden="true">→</span></a>
-  </section>
-
-  <section id="news" class="section news-section" aria-labelledby="news-title">
-    <div class="section-heading">
-      <div><p class="eyebrow">LATEST UPDATES</p><h2 id="news-title">News</h2></div>
-      <p class="section-description">A few recent milestones and activities.</p>
-    </div>
-    <NewsList limit={5} />
-    <details class="older-news">
-      <summary class="section-more">Earlier updates <span aria-hidden="true">⌄</span></summary>
-      <NewsList offset={5} />
-    </details>
   </section>
 </BaseLayout>

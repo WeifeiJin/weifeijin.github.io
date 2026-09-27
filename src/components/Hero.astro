@@ -2,17 +2,15 @@
 import { profile } from '../data/profile';
 ---
 
-<section class="hero" aria-labelledby="hero-title">
+<section id="about" class="hero" aria-labelledby="hero-title">
   <div class="hero-copy">
-    <p class="eyebrow">AI SECURITY RESEARCH</p>
     <h1 id="hero-title">Weifei Jin</h1>
-    <p class="hero-role">{profile.role}</p>
-    <p class="hero-statement">{profile.headline}</p>
-    <p class="hero-intro">I am a Ph.D. student at Duke University, advised by <a href={profile.advisor} target="_blank" rel="noopener noreferrer">Prof. Neil Gong</a>.</p>
+    <p class="hero-bio">I am a Ph.D. student at <strong>Duke University</strong>, advised by <a href={profile.advisor} target="_blank" rel="noopener noreferrer">Prof. Neil Gong</a>. My research focuses on secure, trustworthy, and robust AI systems, from multimodal perception to autonomous agents and external memory.</p>
+    <p class="hero-background">I previously worked as an AI Security Research Intern with the ByteDance SecurityFlow Team, focusing on LLM and agent security. I was also advised by <a href={profile.formerAdvisor} target="_blank" rel="noopener noreferrer">Prof. Ke Xu</a> at Tsinghua University, and I collaborate closely with <a href={profile.collaborator} target="_blank" rel="noopener noreferrer">Dr. Yuxin Cao</a> at the National University of Singapore.</p>
     <div class="hero-actions">
-      <a class="button button-primary" href={profile.scholar} target="_blank" rel="noopener noreferrer">Google Scholar <span aria-hidden="true">↗</span></a>
-      <a class="button button-secondary" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-      <a class="text-link" href={'mailto:' + profile.email}>Email <span aria-hidden="true">↗</span></a>
+      <a href={profile.scholar} target="_blank" rel="noopener noreferrer">Google Scholar <span aria-hidden="true">↗</span></a>
+      <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      <a href={'mailto:' + profile.email}>Email <span aria-hidden="true">↗</span></a>
     </div>
   </div>
   <div class="hero-portrait-wrap">

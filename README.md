@@ -10,7 +10,7 @@ Use Node.js 22.12 or newer. Run `npm ci`, then `npm run dev`. Before publishing,
 
 - Add a publication in `src/data/publications.ts`. Give it a unique `slug`, verified title, authors, venue, year, and paper URL. That entry automatically appears on the publications page and gets a detail page at `/publication/<slug>/`. Set `selectedOrder` to feature it on the homepage in the desired order.
 - Add the latest news item to the top of `src/data/news.ts`. The homepage shows the first five and keeps earlier updates in an expandable list.
-- Edit the biography, awards, and service sections in `src/pages/index.astro`. Research and About both live on the homepage; the old `/about/` URL forwards visitors to `/#about`.
+- Edit the biography in `src/components/Hero.astro` and awards and service in `src/pages/index.astro`. Research and About both live on the homepage; the old `/about/` URL forwards visitors to `/#about`.
 - Edit research areas in `src/data/research.ts` and contact details in `src/data/profile.ts`.
 - Replace `public/images/profile.webp` if the portrait changes. Keep the published image optimized and update its dimensions and alt text in `src/components/Hero.astro` if needed.
 
