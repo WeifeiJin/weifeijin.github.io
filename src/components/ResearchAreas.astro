@@ -1,5 +1,7 @@
 ---
 import { researchAreas } from '../data/research';
+import { publications } from '../data/publications';
+const paperBySlug = new Map(publications.map((publication) => [publication.slug, publication]));
 ---
 
 <section id="research" class="section research-section" aria-labelledby="research-title">
@@ -9,10 +11,29 @@ import { researchAreas } from '../data/research';
   <div class="research-list">
     {researchAreas.map((area) => (
       <article class="research-area">
-        <span class="area-number">{area.number} <span aria-hidden="true">→</span></span>
-        <h3>{area.name}</h3>
-        <p class="area-subtitle">{area.subtitle}</p>
-        <p class="area-description">{area.description}</p>
+        <div class="research-area-main">
+          <span class="area-number">{area.number}</span>
+          <h3>{area.name}</h3>
+          <p class="area-subtitle">{area.subtitle}</p>
+          <p class="area-description">{area.description}</p>
+        </div>
+        {area.paperSlugs.length > 0 ? (
+          <div class="research-related">
+            <h4>Related papers</h4>
+            <ul>
+              {area.paperSlugs.map((slug) => {
+                const paper = paperBySlug.get(slug);
+                if (!paper) throw new Error(`Unknown research paper: ${slug}`);
+                return <li><a href={'/publication/' + paper.slug + '/'}>{paper.title}</a><span>{paper.venue}</span></li>;
+              })}
+            </ul>
+          </div>
+        ) : (
+          <div class="research-related research-current">
+            <h4>Current directions</h4>
+            <ul>{area.currentTopics?.map((topic) => <li>{topic}</li>)}</ul>
+          </div>
+        )}
       </article>
     ))}
   </div>
