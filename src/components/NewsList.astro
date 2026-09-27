@@ -1,8 +1,8 @@
 ---
 import { news } from '../data/news';
-interface Props { limit?: number; }
-const { limit } = Astro.props;
-const items = typeof limit === 'number' ? news.slice(0, limit) : news;
+interface Props { limit?: number; offset?: number; }
+const { limit, offset = 0 } = Astro.props;
+const items = news.slice(offset, typeof limit === 'number' ? offset + limit : undefined);
 ---
 
 <ol class="news-list">

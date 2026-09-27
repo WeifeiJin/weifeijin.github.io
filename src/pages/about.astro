@@ -1,40 +1,18 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import NewsList from '../components/NewsList.astro';
-import { profile } from '../data/profile';
+const destination = '/#about';
 ---
 
-<BaseLayout title="About — Weifei Jin" description="About Weifei Jin, a Ph.D. student at Duke University researching AI security and trustworthy AI.">
-  <header class="page-intro">
-    <p class="eyebrow">ABOUT</p>
-    <h1>Curiosity, rigor, and safer AI<span class="heading-period">.</span></h1>
-    <p>My research asks how AI systems can remain reliable as they perceive, reason, and remember.</p>
-  </header>
-  <div class="about-layout">
-    <div class="about-main">
-      <section class="about-section" aria-labelledby="bio-title">
-        <h2 id="bio-title">Biography</h2>
-        <p>I am a Ph.D. student at <strong>Duke University</strong>, advised by <a href={profile.advisor} target="_blank" rel="noopener noreferrer">Prof. Neil Gong</a>. My research focuses on secure, trustworthy, and robust AI systems, from multimodal perception to autonomous agents and external memory.</p>
-        <p>I previously worked as an AI Security Research Intern with the <strong>ByteDance SecurityFlow Team</strong>, focusing on LLM and agent security. I was also advised by <a href={profile.formerAdvisor} target="_blank" rel="noopener noreferrer">Prof. Ke Xu</a> at <strong>Tsinghua University</strong>, and I collaborate closely with <a href={profile.collaborator} target="_blank" rel="noopener noreferrer">Dr. Yuxin Cao</a> at the National University of Singapore.</p>
-      </section>
-      <section class="about-section" aria-labelledby="awards-title">
-        <h2 id="awards-title">Awards</h2>
-        <ul class="plain-list"><li><span>2025</span> Xiaomi Grand Prize Scholarship</li><li><span>2024</span> Second Prize, 9th National Cryptography Technology Competition</li></ul>
-      </section>
-      <section class="about-section" aria-labelledby="service-title">
-        <h2 id="service-title">Service & mentoring</h2>
-        <p>Reviewer for TDSC, ICASSP 2026, and ICME 2026/2025. I have also mentored junior students working on trustworthy audio-language models.</p>
-      </section>
-      <section id="news" class="about-section" aria-labelledby="all-news-title">
-        <h2 id="all-news-title">All news</h2>
-        <NewsList />
-      </section>
-    </div>
-    <aside class="about-aside" aria-label="Contact links">
-      <p class="eyebrow">GET IN TOUCH</p>
-      <p>Interested in research on safer AI? I would be glad to hear from you.</p>
-      <a href={'mailto:' + profile.email}>{profile.email} <span aria-hidden="true">↗</span></a>
-      <a href={profile.scholar} target="_blank" rel="noopener noreferrer">Google Scholar <span aria-hidden="true">↗</span></a>
-    </aside>
-  </div>
-</BaseLayout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={'0; url=' + destination} />
+    <link rel="canonical" href="https://weifeijin.github.io/#about" />
+    <title>About — Weifei Jin</title>
+  </head>
+  <body>
+    <p>The About section is now on the <a href={destination}>homepage</a>.</p>
+  </body>
+</html>
