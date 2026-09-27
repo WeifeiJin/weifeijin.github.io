@@ -34,7 +34,7 @@ import { selectedPublications } from '../data/publications';
             <h3><a href={'/publication/' + publication.slug + '/'}>{publication.title}</a></h3>
             <p class="selected-authors">{publication.authors.map((author, index) => <><span>{author === 'Weifei Jin' ? <strong>{author}</strong> : author}</span>{index < publication.authors.length - 1 ? ', ' : ''}</>)}</p>
           </div>
-          <a class="selected-paper" href={publication.paper} target="_blank" rel="noopener noreferrer" aria-label={'Read paper: ' + publication.title}>Paper <span aria-hidden="true">↗</span></a>
+          {publication.paper && <a class="selected-paper" href={publication.paper} target="_blank" rel="noopener noreferrer" aria-label={'Read paper: ' + publication.title}>Paper <span aria-hidden="true">↗</span></a>}
         </li>
       ))}
     </ol>

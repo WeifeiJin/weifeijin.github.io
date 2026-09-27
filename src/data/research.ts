@@ -19,8 +19,8 @@ export const researchAreas: ResearchArea[] = [
     number: '02',
     name: 'Cognition',
     subtitle: 'LLMs & Agents',
-    description: 'Guardrails for audio-language models, AI-assisted security analysis, and safer autonomous agents.',
-    paperSlugs: ['2025-neurips-almguard', '2025-tifs-malsight'],
+    description: 'Safety and security of audio-language models and autonomous agents.',
+    paperSlugs: ['2026-neurips-crosssteer', '2025-neurips-almguard'],
   },
   {
     number: '03',

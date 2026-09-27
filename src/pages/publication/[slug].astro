@@ -19,6 +19,6 @@ const { publication } = Astro.props as { publication: Publication };
     <h1>{publication.title}</h1>
     <p class="detail-authors">{publication.authors.map((author, index) => <><span>{author === 'Weifei Jin' ? <strong>{author}</strong> : author}</span>{index < publication.authors.length - 1 ? ', ' : ''}</>)}</p>
     <p class="detail-venue">{publication.venue}</p>
-    <div class="detail-actions"><a class="button button-primary" href={publication.paper} target="_blank" rel="noopener noreferrer">Read paper <span aria-hidden="true">↗</span></a></div>
+    {publication.paper && <div class="detail-actions"><a class="button button-primary" href={publication.paper} target="_blank" rel="noopener noreferrer">Read paper <span aria-hidden="true">↗</span></a></div>}
   </article>
 </BaseLayout>

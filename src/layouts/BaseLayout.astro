@@ -15,6 +15,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script is:inline>
+      (() => {
+        let theme;
+        try { theme = localStorage.getItem('weifei-theme'); } catch {}
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#fcfcfa" />
     <meta name="description" content={description} />
