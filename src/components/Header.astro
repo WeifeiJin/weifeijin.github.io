@@ -2,16 +2,16 @@
 import { profile } from '../data/profile';
 const pathname = Astro.url.pathname;
 const links = [
+  { href: '/#about', label: 'About' },
   { href: '/#research', label: 'Research' },
   { href: '/publications/', label: 'Publications' },
-  { href: '/#about', label: 'About' },
 ];
 ---
 
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="container header-inner">
-    <a class="wordmark" href="/" aria-label="Weifei Jin, homepage">Weifei Jin<span class="wordmark-dot">.</span></a>
+    <a class="wordmark" href="/" aria-label="Weifei Jin, homepage">Weifei Jin</a>
     <nav class="desktop-nav" aria-label="Primary navigation">
       {links.map((link) => <a href={link.href} aria-current={pathname === link.href ? 'page' : undefined}>{link.label}</a>)}
     </nav>

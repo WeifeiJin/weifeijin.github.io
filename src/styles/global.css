@@ -31,7 +31,6 @@ p, h1, h2, h3 { margin-top: 0; }
 .site-header { position: relative; z-index: 3; background: rgba(252, 252, 250, .96); border-bottom: 1px solid var(--line); }
 .header-inner { min-height: 74px; display: flex; align-items: center; gap: 42px; }
 .wordmark { flex: 1; white-space: nowrap; font-size: 19px; font-weight: 750; letter-spacing: -.05em; }
-.wordmark-dot, .heading-period { color: var(--blue); }
 .desktop-nav, .header-elsewhere { display: flex; align-items: center; gap: 29px; }
 .desktop-nav a, .header-elsewhere a { color: #343a3e; font-size: 12px; font-weight: 650; transition: color .18s ease; }
 .desktop-nav a:hover, .header-elsewhere a:hover, .desktop-nav a[aria-current="page"] { color: var(--blue); }
