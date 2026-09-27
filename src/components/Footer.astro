@@ -1,0 +1,15 @@
+---
+import { profile } from '../data/profile';
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© {new Date().getFullYear()} Weifei Jin</p>
+    <div class="footer-links">
+      <a href={profile.scholar} target="_blank" rel="noopener noreferrer">Google Scholar</a>
+      <a href={profile.orcid} target="_blank" rel="noopener noreferrer">ORCID</a>
+      <a href={profile.researchgate} target="_blank" rel="noopener noreferrer">ResearchGate</a>
+      <a href={'mailto:' + profile.email}>Email</a>
+    </div>
+  </div>
+</footer>

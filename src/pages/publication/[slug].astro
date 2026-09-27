@@ -1,0 +1,24 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Publication } from '../../data/publications';
+import { publications } from '../../data/publications';
+
+export const getStaticPaths = (() => publications.map((publication) => ({
+  params: { slug: publication.slug },
+  props: { publication },
+}))) satisfies GetStaticPaths;
+
+const { publication } = Astro.props as { publication: Publication };
+---
+
+<BaseLayout title={publication.title + ' — Weifei Jin'} description={publication.title + '. ' + publication.venue + '.'}>
+  <article class="publication-detail">
+    <a class="back-link" href="/publications/">← All publications</a>
+    <p class="eyebrow">PUBLICATION / {publication.year}</p>
+    <h1>{publication.title}</h1>
+    <p class="detail-authors">{publication.authors.map((author, index) => <><span>{author === 'Weifei Jin' ? <strong>{author}</strong> : author}</span>{index < publication.authors.length - 1 ? ', ' : ''}</>)}</p>
+    <p class="detail-venue">{publication.venue}</p>
+    <div class="detail-actions"><a class="button button-primary" href={publication.paper} target="_blank" rel="noopener noreferrer">Read paper <span aria-hidden="true">↗</span></a></div>
+  </article>
+</BaseLayout>

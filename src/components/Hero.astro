@@ -1,0 +1,21 @@
+---
+import { profile } from '../data/profile';
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <p class="eyebrow">WEIFEI JIN <span aria-hidden="true">/</span> AI SECURITY RESEARCH</p>
+    <p class="hero-role">{profile.role}</p>
+    <h1 id="hero-title">Building secure and trustworthy AI systems <em>across perception, cognition, and memory.</em></h1>
+    <p class="hero-intro">I am a Ph.D. student at Duke University, advised by <a href={profile.advisor} target="_blank" rel="noopener noreferrer">Prof. Neil Gong</a>.</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href={profile.scholar} target="_blank" rel="noopener noreferrer">Google Scholar <span aria-hidden="true">↗</span></a>
+      <a class="button button-secondary" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      <a class="text-link" href={'mailto:' + profile.email}>Email <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+  <div class="hero-portrait-wrap">
+    <img class="hero-portrait" src="/images/profile.webp" width="800" height="1000" alt="Weifei Jin standing outdoors at Mont Saint-Michel" fetchpriority="high" />
+    <span class="portrait-caption">WEIFEI JIN · DUKE UNIVERSITY</span>
+  </div>
+</section>

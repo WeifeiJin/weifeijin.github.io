@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://weifeijin.github.io/sitemap-index.xml

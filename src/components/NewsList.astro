@@ -1,0 +1,10 @@
+---
+import { news } from '../data/news';
+interface Props { limit?: number; }
+const { limit } = Astro.props;
+const items = typeof limit === 'number' ? news.slice(0, limit) : news;
+---
+
+<ol class="news-list">
+  {items.map((item) => <li><time>{item.date}</time><p>{item.text}</p></li>)}
+</ol>

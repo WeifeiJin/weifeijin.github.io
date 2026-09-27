@@ -1,0 +1,33 @@
+---
+import { profile } from '../data/profile';
+const pathname = Astro.url.pathname;
+const links = [
+  { href: '/#research', label: 'Research' },
+  { href: '/publications/', label: 'Publications' },
+  { href: '/about/', label: 'About' },
+];
+---
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="wordmark" href="/" aria-label="Weifei Jin, homepage">Weifei Jin<span class="wordmark-dot">.</span></a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      {links.map((link) => <a href={link.href} aria-current={pathname === link.href ? 'page' : undefined}>{link.label}</a>)}
+    </nav>
+    <div class="header-elsewhere" aria-label="Elsewhere">
+      <a href={profile.scholar} target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">Scholar</a>
+      <a href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+      <a href={'mailto:' + profile.email} aria-label="Email Weifei Jin">Email</a>
+    </div>
+    <details class="mobile-nav">
+      <summary>Menu <span aria-hidden="true">+</span></summary>
+      <nav aria-label="Mobile navigation">
+        {links.map((link) => <a href={link.href}>{link.label}</a>)}
+        <a href={profile.scholar} target="_blank" rel="noopener noreferrer">Google Scholar</a>
+        <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href={'mailto:' + profile.email}>Email</a>
+      </nav>
+    </details>
+  </div>
+</header>

@@ -1,0 +1,15 @@
+---
+import type { Publication } from '../data/publications';
+interface Props { publication: Publication; }
+const { publication } = Astro.props;
+---
+
+<article class="publication-card">
+  <div class="publication-card-top"><span class="venue-pill">{publication.venue}</span><span class="card-index" aria-hidden="true">↗</span></div>
+  <p class="card-topic">{publication.topic}</p>
+  <h3><a href={'/publication/' + publication.slug + '/'}>{publication.title}</a></h3>
+  <div class="publication-card-bottom">
+    <span>{publication.year}</span>
+    <a href={publication.paper} target="_blank" rel="noopener noreferrer" aria-label={'Read paper: ' + publication.title}>Read paper <span aria-hidden="true">↗</span></a>
+  </div>
+</article>
