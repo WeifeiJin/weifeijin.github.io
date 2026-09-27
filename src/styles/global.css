@@ -161,15 +161,25 @@ p, h1, h2, h3 { margin-top: 0; }
 .news-list li:first-child p { font-weight: 610; }
 .news-list em { color: var(--news-accent); font-style: italic; font-weight: 680; }
 .news-section .section-more { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
-.recognition-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) repeat(2, minmax(0, 1fr)); gap: clamp(32px, 5vw, 70px); }
-.recognition-block { padding-top: 22px; border-top: 1px solid var(--line); }
-.recognition-block h2 { margin: 0 0 23px; font-size: 24px; font-weight: 660; letter-spacing: -.04em; }
-.recognition-block p { max-width: 310px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
-.recognition-block .plain-list li:first-child { padding-top: 0; border-top: 0; }
-.mentoring-list { list-style: none; margin: 13px 0 0; padding: 0; }
-.mentoring-list li { padding: 10px 0; border-top: 1px solid var(--line); color: var(--body-secondary); font-size: 13px; line-height: 1.6; }
-.mentoring-list strong { color: var(--ink); font-weight: 700; }
-.mentoring-list a { color: var(--blue); text-decoration: underline; text-decoration-color: var(--link-underline); text-underline-offset: 3px; }
+.recognition-section { padding-block: 62px 68px; }
+.recognition-section .section-heading { margin-bottom: 28px; }
+.recognition-section .section-heading h2 { font-size: clamp(29px, 3vw, 38px); }
+.awards-list { max-width: 900px; }
+.plain-list.awards-list li { grid-template-columns: 72px 1fr; padding: 17px 0; font-size: 15px; }
+.awards-list li:last-child { border-bottom: 1px solid var(--line); }
+.service-description { max-width: 900px; margin: 0; color: var(--body-secondary); font-size: 16px; line-height: 1.7; }
+.mentoring-intro { margin: 0 0 24px; color: var(--muted); font-size: 15px; line-height: 1.6; }
+.mentoring-rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.mentoring-row { display: grid; grid-template-columns: minmax(270px, .35fr) minmax(0, 1fr); gap: 35px; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--line); }
+.mentoring-people { display: flex; flex-wrap: wrap; gap: 9px; }
+.mentoring-person { display: inline-flex; align-items: center; justify-content: space-between; gap: 16px; min-width: 135px; min-height: 53px; padding: 11px 15px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--ink); font-size: 15px; font-weight: 670; letter-spacing: -.02em; }
+.mentoring-person-link { border-color: var(--related-accent); color: var(--blue); transition: background .18s ease, border-color .18s ease; }
+.mentoring-person-link:hover { border-color: var(--blue); background: var(--blue-soft); }
+.mentoring-person-link span { font-size: 14px; font-weight: 400; }
+.mentoring-work { min-width: 0; }
+.mentoring-work > a { font-size: 16px; font-weight: 650; line-height: 1.45; }
+.mentoring-work > a:hover { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.mentoring-work p { margin: 7px 0 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
 .older-news summary { cursor: pointer; list-style: none; }
 .older-news summary::-webkit-details-marker { display: none; }
 .older-news summary span { transition: transform .18s ease; }
@@ -246,7 +256,7 @@ p, h1, h2, h3 { margin-top: 0; }
   .experience-logo img { height: 50px; }
   .experience-topline { display: block; }
   .experience-period { display: block; margin: 0 0 9px; }
-  .recognition-grid { grid-template-columns: 1fr; gap: 42px; }
+  .mentoring-row { grid-template-columns: 1fr; gap: 14px; }
   .page-intro { padding: 75px 0 55px; }
   .publication-year { grid-template-columns: 1fr; gap: 18px; }
   .publication-year h2 { padding-bottom: 8px; }
