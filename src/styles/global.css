@@ -177,9 +177,7 @@ p, h1, h2, h3 { margin-top: 0; }
 .mentoring-person-link:hover { border-color: var(--blue); background: var(--blue-soft); }
 .mentoring-person-link span { font-size: 14px; font-weight: 400; }
 .mentoring-work { min-width: 0; }
-.mentoring-work > a { font-size: 16px; font-weight: 650; line-height: 1.45; }
-.mentoring-work > a:hover { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
-.mentoring-work p { margin: 7px 0 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+.mentoring-work p { margin: 0; color: var(--body-secondary); font-size: 16px; line-height: 1.6; }
 .older-news summary { cursor: pointer; list-style: none; }
 .older-news summary::-webkit-details-marker { display: none; }
 .older-news summary span { transition: transform .18s ease; }
