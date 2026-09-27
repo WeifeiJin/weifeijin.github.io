@@ -45,7 +45,7 @@ export const researchExperience: ResearchExperience[] = [
     period: 'Aug 2024 – Mar 2025',
     details: [
       'Collaborator: ',
-      { name: 'Dr. Yuxin Cao', url: 'https://yuxincao22.github.io/' },
+      { name: 'Yuxin Cao', url: 'https://yuxincao22.github.io/' },
       ' (',
       { name: 'Prof. Jin Song Dong', url: 'https://www.comp.nus.edu.sg/cs/people/dongjs/' },
       '’s group)',

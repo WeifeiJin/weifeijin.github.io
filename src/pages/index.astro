@@ -22,19 +22,22 @@ import { selectedPublications } from '../data/publications';
   </section>
   <ResearchAreas />
 
-  <section class="section selected-section" aria-labelledby="selected-title">
+  <section id="selected" class="section selected-section" aria-labelledby="selected-title">
     <div class="section-heading">
       <h2 id="selected-title">Selected papers</h2>
     </div>
     <ol class="selected-list">
       {selectedPublications.map((publication) => (
         <li class="selected-item">
-          <span class="selected-venue">{publication.venue}</span>
+          <div class="selected-figure">
+            <img src={publication.figure} alt={publication.figureAlt} loading="lazy" decoding="async" />
+          </div>
           <div class="selected-copy">
+            <p class="selected-venue">{publication.venue}</p>
             <h3><a href={'/publication/' + publication.slug + '/'}>{publication.title}</a></h3>
             <p class="selected-authors">{publication.authors.map((author, index) => <><span>{author === 'Weifei Jin' ? <strong>{author}</strong> : author}</span>{index < publication.authors.length - 1 ? ', ' : ''}</>)}</p>
+            {publication.paper && <a class="selected-paper" href={publication.paper} target="_blank" rel="noopener noreferrer" aria-label={'Read paper: ' + publication.title}>Paper <span aria-hidden="true">↗</span></a>}
           </div>
-          {publication.paper && <a class="selected-paper" href={publication.paper} target="_blank" rel="noopener noreferrer" aria-label={'Read paper: ' + publication.title}>Paper <span aria-hidden="true">↗</span></a>}
         </li>
       ))}
     </ol>
