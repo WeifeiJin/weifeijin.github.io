@@ -4,13 +4,13 @@ import { researchExperience } from '../data/experience';
 
 <section id="experience" class="section experience-section" aria-labelledby="experience-title">
   <div class="section-heading">
-    <h2 id="experience-title">Research experience</h2>
+    <h2 id="experience-title">Experiences</h2>
   </div>
   <ol class="experience-list">
     {researchExperience.map((experience) => (
       <li class="experience-item">
         <span class="experience-logo" aria-hidden="true">
-          <img src={experience.logo} alt="" width="112" height="56" loading="lazy" />
+          <img src={experience.logo} alt="" loading="lazy" decoding="async" />
         </span>
         <div class="experience-copy">
           <div class="experience-topline">
@@ -18,7 +18,7 @@ import { researchExperience } from '../data/experience';
             <span class="experience-period">{experience.period}</span>
           </div>
           <p class="experience-role">{experience.role}</p>
-          <p class="experience-details">{experience.details}</p>
+          <p class="experience-details">{experience.details.map((part) => typeof part === 'string' ? part : <a href={part.url} target="_blank" rel="noopener noreferrer">{part.name}</a>)}</p>
         </div>
       </li>
     ))}

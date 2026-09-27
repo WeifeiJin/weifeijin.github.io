@@ -131,8 +131,8 @@ p, h1, h2, h3 { margin-top: 0; }
 
 .experience-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
 .experience-item { display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: 30px; align-items: center; padding: 25px 0; border-bottom: 1px solid var(--line); }
-.experience-logo { display: grid; place-items: center; width: 128px; height: 76px; padding: 9px; border: 1px solid #e4e7e5; border-radius: 9px; background: #fff; }
-.experience-logo img { width: 100%; height: 100%; object-fit: contain; }
+.experience-logo { display: flex; align-items: center; justify-content: center; overflow: hidden; width: 128px; height: 76px; padding: 9px; border: 1px solid #e4e7e5; border-radius: 9px; background: #fff; }
+.experience-logo img { flex: none; width: 100%; height: 56px; object-fit: contain; }
 .experience-copy { min-width: 0; }
 .experience-topline { display: flex; justify-content: space-between; align-items: baseline; gap: 12px 28px; }
 .experience-topline h3 { margin: 0 0 6px; font-size: 18px; font-weight: 670; letter-spacing: -.025em; line-height: 1.35; }
@@ -141,6 +141,8 @@ p, h1, h2, h3 { margin-top: 0; }
 .experience-period { flex: none; color: var(--muted); font-size: 13px; font-weight: 620; white-space: nowrap; }
 .experience-role { margin: 0 0 5px; color: var(--blue); font-size: 14px; font-weight: 650; }
 .experience-details { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.experience-details a { color: var(--blue); text-decoration: underline; text-decoration-color: var(--link-underline); text-underline-offset: 3px; }
+.experience-details a:hover { text-decoration-color: currentColor; }
 
 .news-section { border-top: 2px solid var(--blue); }
 .news-section .section-heading { margin-bottom: 26px; }
@@ -232,6 +234,7 @@ p, h1, h2, h3 { margin-top: 0; }
   .selected-paper { grid-column: 2; grid-row: 1; padding: 0; }
   .experience-item { grid-template-columns: 92px minmax(0, 1fr); gap: 20px; }
   .experience-logo { width: 92px; height: 70px; }
+  .experience-logo img { height: 50px; }
   .experience-topline { display: block; }
   .experience-period { display: block; margin: 0 0 9px; }
   .recognition-grid { grid-template-columns: 1fr; gap: 42px; }
@@ -255,6 +258,7 @@ p, h1, h2, h3 { margin-top: 0; }
   .news-list p { grid-column: 2; grid-row: 2; font-size: 15px; }
   .experience-item { grid-template-columns: 76px minmax(0, 1fr); gap: 14px; align-items: start; }
   .experience-logo { width: 76px; height: 63px; padding: 6px; }
+  .experience-logo img { height: 49px; }
   .experience-topline h3 { font-size: 16px; }
   .experience-remote { font-size: 12px; }
   .footer-inner { align-items: start; flex-direction: column; justify-content: center; padding-block: 24px; }

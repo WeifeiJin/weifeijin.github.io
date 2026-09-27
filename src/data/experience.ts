@@ -4,7 +4,7 @@ export interface ResearchExperience {
   remote?: boolean;
   role: string;
   period: string;
-  details: string;
+  details: Array<string | { name: string; url: string }>;
   logo: string;
 }
 
@@ -12,9 +12,14 @@ export const researchExperience: ResearchExperience[] = [
   {
     institution: 'ByteDance',
     unit: 'SecurityFlow Team',
-    role: 'AI Security Research Intern',
+    role: 'Research Intern',
     period: 'Feb 2026 – May 2026',
-    details: 'Mentors: Dr. Yang Bai and Dr. Dongxian Wu',
+    details: [
+      'Mentors: ',
+      { name: 'Dr. Yang Bai', url: 'https://bymavis.github.io/' },
+      ' and ',
+      { name: 'Dr. Dongxian Wu', url: 'https://csdongxian.github.io/' },
+    ],
     logo: '/images/experience/bytedance.svg',
   },
   {
@@ -22,7 +27,7 @@ export const researchExperience: ResearchExperience[] = [
     remote: true,
     role: 'Research Collaborator',
     period: 'May 2025 – Nov 2025',
-    details: 'Advisor: Prof. Neil Gong',
+    details: ['Advisor: ', { name: 'Prof. Neil Gong', url: 'https://people.duke.edu/~zg70/' }],
     logo: '/images/experience/duke.png',
   },
   {
@@ -30,7 +35,7 @@ export const researchExperience: ResearchExperience[] = [
     unit: 'THUCSNET',
     role: 'Undergraduate Researcher',
     period: 'Nov 2024 – Mar 2025',
-    details: 'Advisor: Prof. Ke Xu',
+    details: ['Advisor: ', { name: 'Prof. Ke Xu', url: 'https://www.insc.tsinghua.edu.cn/inscen/info/1255/1060.htm' }],
     logo: '/images/experience/tsinghua.png',
   },
   {
@@ -38,15 +43,26 @@ export const researchExperience: ResearchExperience[] = [
     remote: true,
     role: 'Research Collaborator',
     period: 'Aug 2024 – Mar 2025',
-    details: 'Collaborator: Dr. Yuxin Cao (Prof. Jin Song Dong’s group)',
+    details: [
+      'Collaborator: ',
+      { name: 'Dr. Yuxin Cao', url: 'https://yuxincao22.github.io/' },
+      ' (',
+      { name: 'Prof. Jin Song Dong', url: 'https://www.comp.nus.edu.sg/cs/people/dongjs/' },
+      '’s group)',
+    ],
     logo: '/images/experience/nus.png',
   },
   {
     institution: 'CSIRO’s Data61',
     remote: true,
     role: 'Research Collaborator',
-    period: 'May 2024 – May 2025',
-    details: 'Mentor: Dr. Derui Wang; collaborator: Dr. Minhui Xue',
+    period: 'Oct 2023 – May 2025',
+    details: [
+      'Mentor: ',
+      { name: 'Dr. Derui Wang', url: 'https://neuralsec.github.io/cv/' },
+      '; collaborator: ',
+      { name: 'Dr. Minhui Xue', url: 'https://minhui-xue.github.io/' },
+    ],
     logo: '/images/experience/csiro.png',
   },
 ];
