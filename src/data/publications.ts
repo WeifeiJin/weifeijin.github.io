@@ -21,6 +21,7 @@ export const publications: Publication[] = [
     title: 'DUAP: Dual-task Universal Adversarial Perturbations Against Voice Control Systems',
     authors: ['Suyang Sun', 'Weifei Jin', 'Yuxin Cao', 'Wei Song', 'Jie Hao'],
     venue: 'ICME 2026', paper: 'https://arxiv.org/abs/2601.12786',
+    selectedAt: '2026-03',
   },
   {
     slug: '2025-neurips-almguard', year: 2025,
@@ -34,12 +35,14 @@ export const publications: Publication[] = [
     title: 'MALSIGHT: Exploring Malicious Source Code and Benign Pseudocode for Iterative Binary Malware Summarization',
     authors: ['Haolang Lu', 'Hongrui Peng', 'Guoshun Nan', 'Jiaoyang Cui', 'Cheng Wang', 'Weifei Jin', 'Songtao Wang', 'Shengli Pan', 'Xiaofeng Tao'],
     venue: 'IEEE TIFS 2025', paper: 'https://arxiv.org/abs/2406.18379',
+    selectedAt: '2025-06',
   },
   {
     slug: '2025-icme-transferability', year: 2025,
     title: 'Boosting the Transferability of Audio Adversarial Examples with Acoustic Representation Optimization',
     authors: ['Weifei Jin', 'Junjie Su', 'Hejia Wang', 'Yulin Ye', 'Jie Hao'],
     venue: 'ICME 2025', paper: 'https://arxiv.org/abs/2503.19591',
+    selectedAt: '2025-03',
   },
   {
     slug: '2025-usenix-whispering', year: 2025,
