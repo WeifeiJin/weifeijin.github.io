@@ -1,5 +1,6 @@
 ---
 import { profile } from '../data/profile';
+import SocialIcon from './SocialIcon.astro';
 ---
 
 <section id="about" class="hero" aria-labelledby="hero-title">
@@ -8,9 +9,10 @@ import { profile } from '../data/profile';
     <p class="hero-bio">I am a Ph.D. student at <strong>Duke University</strong>, advised by <a href={profile.advisor} target="_blank" rel="noopener noreferrer">Prof. Neil Gong</a>. My research focuses on secure, trustworthy, and robust AI systems, from multimodal perception to autonomous agents and external memory.</p>
     <p class="hero-background">I previously worked as a Research Intern with the ByteDance SecurityFlow Team, focusing on LLM and agent security. I was also advised by <a href={profile.formerAdvisor} target="_blank" rel="noopener noreferrer">Prof. Ke Xu</a> at Tsinghua University, and I collaborate closely with <a href={profile.collaborator} target="_blank" rel="noopener noreferrer">Yuxin Cao</a> at the National University of Singapore.</p>
     <div class="hero-actions">
-      <a href={profile.scholar} target="_blank" rel="noopener noreferrer">Google Scholar <span aria-hidden="true">↗</span></a>
-      <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-      <a href={'mailto:' + profile.email}>Email <span aria-hidden="true">↗</span></a>
+      <a href={profile.scholar} target="_blank" rel="noopener noreferrer"><SocialIcon name="scholar" />Google Scholar</a>
+      <a href={profile.github} target="_blank" rel="noopener noreferrer"><SocialIcon name="github" />GitHub</a>
+      <a href={profile.linkedin} target="_blank" rel="noopener noreferrer"><SocialIcon name="linkedin" />LinkedIn</a>
+      <a href={'mailto:' + profile.email}><SocialIcon name="email" />Email</a>
     </div>
   </div>
   <div class="hero-portrait-wrap">
