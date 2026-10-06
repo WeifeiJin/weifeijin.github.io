@@ -39,19 +39,31 @@ const heading = language === 'both' ? '订阅更新 · Subscribe' : language ===
     const container = section.querySelector('.blog-subscribe-form');
     if (!container) continue;
     const label = language === 'zh' ? '订阅' : 'Subscribe';
+    const confirmation = language === 'zh'
+      ? '请查收邮件并点击链接确认订阅。'
+      : 'Please check your inbox to confirm your subscription.';
+    const providerConfirmation = '请查收邮件并点击链接确认订阅。 / Please check your inbox to confirm your subscription.';
 
-    const localizeSubmitLabel = () => {
+    const localizeFormText = () => {
       const submit = container.querySelector<HTMLInputElement>(
         '[data-form="10de4992-c1d0-11f1-b2f4-6328ab11288d"] form.emailoctopus-form input[type="submit"]',
       );
       if (submit && submit.value !== label) submit.value = label;
+
+      const success = container.querySelector<HTMLElement>(
+        '[data-form="10de4992-c1d0-11f1-b2f4-6328ab11288d"] .emailoctopus-success-message',
+      );
+      if (success?.textContent?.trim() === providerConfirmation) {
+        success.textContent = confirmation;
+        success.lang = language === 'zh' ? 'zh-CN' : 'en';
+      }
     };
 
-    // The official embed loads asynchronously. Only change its submit label;
-    // leave its fields, validation, submission and confirmation messages intact.
-    const observer = new MutationObserver(localizeSubmitLabel);
-    observer.observe(container, { childList: true, subtree: true });
-    localizeSubmitLabel();
+    // Localize only the submit label and the provider's populated confirmation
+    // text. The embed still owns validation, submission and success/error state.
+    const observer = new MutationObserver(localizeFormText);
+    observer.observe(container, { childList: true, characterData: true, subtree: true });
+    localizeFormText();
   }
 </script>
 
