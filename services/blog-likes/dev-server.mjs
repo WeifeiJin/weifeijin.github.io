@@ -9,7 +9,7 @@ const port = Number(process.env.BLOG_LIKES_PORT || 8787);
 if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('Invalid BLOG_LIKES_PORT');
 const env = {
   ENVIRONMENT: 'development',
-  SITE_ORIGIN: 'https://weifeijin.github.io',
+  SITE_ORIGIN: 'https://weifeijin.com',
   DEV_ORIGINS: process.env.BLOG_LIKES_DEV_ORIGINS || 'http://127.0.0.1:4321,http://localhost:4321,http://127.0.0.1:4322,http://localhost:4322',
   ALLOWED_SLUGS: process.env.BLOG_LIKES_SLUGS || 'from-research-to-researcher',
   DB: createLocalDatabase(process.env.BLOG_LIKES_DB || join(tmpdir(), 'weifeijin-blog-likes-preview.sqlite')),

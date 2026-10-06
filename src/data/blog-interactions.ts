@@ -9,12 +9,12 @@ export const blogComments = {
   } as Record<string, number>,
 };
 
-// Keep the existing counter when an article's public URL changes.
-export const blogViewPaths: Record<string, string> = {
-  'from-research-to-researcher': '/blog/from-doing-research-to-becoming-a-researcher/',
+// Keep the full original counter URL when an article or site is renamed.
+export const blogViewUrls: Record<string, string> = {
+  'from-research-to-researcher': 'https://weifeijin.github.io/blog/from-doing-research-to-becoming-a-researcher/',
 };
 
 export const blogLikes = {
   // Public Cloudflare Worker origin; never put credentials in this URL.
-  apiUrl: 'https://weifeijin-blog-likes.ninedreamwf.workers.dev',
+  apiUrl: 'https://likes.weifeijin.com',
 };

@@ -1,12 +1,12 @@
 ---
 interface Props {
-  /** Use the same production URL for every translation of an article. */
-  canonicalUrl: string;
+  /** Preserve the original counter URL for every translation and domain. */
+  counterUrl: string;
   language: 'zh' | 'en';
 }
 
-const { canonicalUrl, language } = Astro.props;
-const target = new URL(canonicalUrl);
+const { counterUrl, language } = Astro.props;
+const target = new URL(counterUrl);
 target.search = '';
 target.hash = '';
 const chinese = language === 'zh';
@@ -16,6 +16,7 @@ const chinese = language === 'zh';
   class="blog-views"
   data-blog-views
   data-url={target.href}
+  data-site-origin={Astro.site?.origin}
   data-language={language}
   data-loading={chinese ? '浏览量加载中…' : 'Loading views…'}
   data-unavailable={chinese ? '浏览量暂不可用' : 'Views unavailable'}
@@ -32,21 +33,22 @@ const chinese = language === 'zh';
     if (element.dataset.initialized) return;
     element.dataset.initialized = 'true';
     const label = element.querySelector<HTMLElement>('[data-view-label]');
-    const canonicalUrl = element.dataset.url;
-    if (!label || !canonicalUrl) return;
+    const counterUrl = element.dataset.url;
+    if (!label || !counterUrl) return;
 
     const unavailable = element.dataset.unavailable ?? 'Views unavailable';
     let target: URL;
     try {
-      target = new URL(canonicalUrl);
+      target = new URL(counterUrl);
     } catch {
       label.textContent = unavailable;
       return;
     }
 
     // Count only on the real site: development, previews, and mirrors must not
-    // change the production total. Queries/fragments never become new counters.
-    if (location.origin !== target.origin || target.protocol !== 'https:') return;
+    // change the production total. A legacy counter URL can have a different
+    // origin from the current site; queries/fragments never become new counters.
+    if (location.origin !== element.dataset.siteOrigin || target.protocol !== 'https:') return;
 
     label.textContent = element.dataset.loading ?? 'Loading views…';
     const controller = new AbortController();

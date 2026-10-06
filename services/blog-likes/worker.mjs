@@ -1,9 +1,23 @@
 const MAX_BODY_BYTES = 512;
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const VISITOR_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+const LEGACY_SITE_ORIGIN = 'https://weifeijin.github.io';
+
+function exactHttpsOrigin(origin) {
+  const url = new URL(origin);
+  if (url.origin !== origin || url.protocol !== 'https:' || ['localhost', '127.0.0.1', '[::1]'].includes(url.hostname)) {
+    throw new Error('Production origins must be exact non-loopback HTTPS origins');
+  }
+  return origin;
+}
 
 function allowedOrigins(env) {
-  const origins = new Set([env.SITE_ORIGIN]);
+  const origins = new Set([exactHttpsOrigin(env.SITE_ORIGIN)]);
+  if (env.TRANSITION_ORIGIN) {
+    const origin = exactHttpsOrigin(env.TRANSITION_ORIGIN);
+    if (origin !== LEGACY_SITE_ORIGIN) throw new Error('Only the original GitHub Pages origin may be used during transition');
+    origins.add(origin);
+  }
   if (env.ENVIRONMENT === 'development') {
     for (const value of (env.DEV_ORIGINS || '').split(',').filter(Boolean)) {
       const origin = value.trim();

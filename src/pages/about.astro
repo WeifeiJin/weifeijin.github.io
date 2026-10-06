@@ -1,5 +1,6 @@
 ---
 const destination = '/#about';
+const canonical = new URL(destination, Astro.site).href;
 ---
 
 <!doctype html>
@@ -9,7 +10,7 @@ const destination = '/#about';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
     <meta http-equiv="refresh" content={'0; url=' + destination} />
-    <link rel="canonical" href="https://weifeijin.github.io/#about" />
+    <link rel="canonical" href={canonical} />
     <title>About — Weifei Jin</title>
   </head>
   <body>

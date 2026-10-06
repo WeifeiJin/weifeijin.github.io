@@ -8,7 +8,7 @@ An anonymous like is stored once per article and random browser UUID. Clicking a
 - `GET /likes/from-research-to-researcher?visitor=<random-UUID-v4>` also returns that browser's state.
 - `PUT /likes/from-research-to-researcher`, `Content-Type: application/json`, body `{ "visitor": "<random-UUID-v4>", "liked": true }` sets the state. Send `false` to unlike. Retrying either request is safe.
 
-Send `Origin: https://weifeijin.github.io`. Production accepts only that exact origin and configured slugs. The browser sends requests with `credentials: 'omit'` and an abort-controller timeout. It generates a UUID once with `crypto.randomUUID()` or a cryptographically random fallback and persists it in localStorage. Chinese and English versions use the same slug. Origin checks restrict browsers, but cannot stop a determined script from forging requests or generating many new UUIDs; this is a lightweight blog reaction count, not verified identity.
+Send `Origin: https://weifeijin.com`. Production also accepts the exact legacy `https://weifeijin.github.io` origin only while `TRANSITION_ORIGIN` is configured. Remove that variable after migration to disable legacy access. Both configuration values must be canonical HTTPS origins; the transition value can only be the original GitHub Pages origin. Neither `www`, other subdomains, nor localhost is implicitly allowed in production. The browser sends requests with `credentials: 'omit'` and an abort-controller timeout. It generates a UUID once with `crypto.randomUUID()` or a cryptographically random fallback and persists it in localStorage. Chinese and English versions use the same slug. Origin checks restrict browsers, but cannot stop a determined script from forging requests or generating many new UUIDs; this is a lightweight blog reaction count, not verified identity.
 
 ## Tests and local preview
 
@@ -23,7 +23,7 @@ The preview API binds only to `127.0.0.1:8787`, stores test data in the OS tempo
 
 ## Cloudflare setup
 
-The deployed Worker is `https://weifeijin-blog-likes.ninedreamwf.workers.dev`, bound to the database in `wrangler.toml`. To update it, log in with the required deployment scopes and use Wrangler 4 from this directory:
+`wrangler.toml` attaches `https://likes.weifeijin.com` as a custom domain to the existing Worker and keeps its `https://weifeijin-blog-likes.ninedreamwf.workers.dev` address available during migration. The D1 database ID and article slug remain unchanged. The Cloudflare zone must be active before the custom domain can be deployed. To update the Worker, log in with the required Worker, D1, and custom-domain deployment permissions and use Wrangler 4 from this directory:
 
 ```powershell
 npx wrangler@4 login --scopes account:read user:read workers_scripts:write d1:write --use-keyring
@@ -37,7 +37,7 @@ npx wrangler@4 d1 create weifeijin-blog-likes
 npx wrangler@4 d1 execute weifeijin-blog-likes --remote --file=schema.sql
 ```
 
-Set `blogLikes.apiUrl` in `src/data/blog-interactions.ts` to the HTTPS Worker origin and rebuild the site. `PUBLIC_BLOG_LIKES_API` overrides it for local QA. The deployed API has passed read, like, duplicate like, unlike, and re-like checks, with the test vote removed afterwards. Add future article slugs to `ALLOWED_SLUGS` before deployment. Do not put a Cloudflare API token in the website source. Worker invocation logging is disabled in this configuration.
+`blogLikes.apiUrl` in `src/data/blog-interactions.ts` targets `https://likes.weifeijin.com`. Verify that domain's HTTPS, GET, and PUT preflight responses before publishing the rebuilt site; the previous `workers.dev` deployment checks do not prove the new hostname works. `PUBLIC_BLOG_LIKES_API` overrides the address for local QA. Add future article slugs to `ALLOWED_SLUGS` before deployment. Do not put a Cloudflare API token in the website source. Worker invocation logging is disabled in this configuration.
 
 The local SQLite tests verify request validation and actual database behavior, but do not replace a final check against Cloudflare D1. [D1 batch transactions](https://developers.cloudflare.com/d1/worker-api/d1-database/#batch) and [Wrangler D1 commands](https://developers.cloudflare.com/d1/wrangler-commands/) are documented by Cloudflare.
 

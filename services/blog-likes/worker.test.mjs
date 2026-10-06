@@ -4,14 +4,15 @@ import { randomUUID } from 'node:crypto';
 import worker from './worker.mjs';
 import { createLocalDatabase } from './sqlite-adapter.mjs';
 
-const ORIGIN = 'https://weifeijin.github.io';
+const ORIGIN = 'https://weifeijin.com';
+const LEGACY_ORIGIN = 'https://weifeijin.github.io';
 const SLUG = 'from-research-to-researcher';
 const URL = `https://likes.example/likes/${SLUG}`;
 
 function fixture(t, overrides = {}) {
   const DB = createLocalDatabase();
   t.after(() => DB.close());
-  const env = { DB, SITE_ORIGIN: ORIGIN, ENVIRONMENT: 'production', ALLOWED_SLUGS: SLUG, ...overrides };
+  const env = { DB, SITE_ORIGIN: ORIGIN, TRANSITION_ORIGIN: LEGACY_ORIGIN, ENVIRONMENT: 'production', ALLOWED_SLUGS: SLUG, ...overrides };
   const call = async (method = 'GET', body, options = {}) => {
     const response = await worker.fetch(new Request(options.url || URL, {
       method,
@@ -47,6 +48,38 @@ test('two visitors share one count and only remove their own like', async t => {
   assert.deepEqual((await call('GET', undefined, { url: `${URL}?visitor=${second}` })).body, { count: 1, liked: true });
 });
 
+test('the new and explicit legacy origins share existing visitor state and count', async t => {
+  const { call } = fixture(t);
+  const visitor = randomUUID();
+  assert.deepEqual((await call('PUT', { visitor, liked: true })).body, { count: 1, liked: true });
+  const legacyState = await call('GET', undefined, { url: `${URL}?visitor=${visitor}`, headers: { Origin: LEGACY_ORIGIN } });
+  assert.equal(legacyState.response.headers.get('Access-Control-Allow-Origin'), LEGACY_ORIGIN);
+  assert.deepEqual(legacyState.body, { count: 1, liked: true });
+  assert.deepEqual((await call('PUT', { visitor, liked: true }, { headers: { Origin: LEGACY_ORIGIN } })).body, { count: 1, liked: true });
+  assert.deepEqual((await call('PUT', { visitor, liked: false })).body, { count: 0, liked: false });
+});
+
+test('legacy access can be disabled without accepting another transition origin', async t => {
+  const { call } = fixture(t, { TRANSITION_ORIGIN: '' });
+  assert.equal((await call('GET')).response.status, 200);
+  assert.equal((await call('GET', undefined, { headers: { Origin: LEGACY_ORIGIN } })).response.status, 403);
+});
+
+test('noncanonical, non-HTTPS, and foreign transition configuration fails closed', async t => {
+  for (const origin of [LEGACY_ORIGIN + '/', LEGACY_ORIGIN + ':443', LEGACY_ORIGIN + '/blog/', 'http://weifeijin.github.io', 'https://evil.example', 'https://localhost', 'http://localhost:4321', LEGACY_ORIGIN + ',https://evil.example']) {
+    const { call, DB } = fixture(t, { TRANSITION_ORIGIN: origin });
+    assert.equal((await call('PUT', { visitor: randomUUID(), liked: true })).response.status, 503);
+    assert.equal(DB.sqlite.prepare('SELECT COUNT(*) AS count FROM article_likes').get().count, 0);
+  }
+});
+
+test('production site configuration must also be an exact HTTPS origin', async t => {
+  for (const origin of [ORIGIN + '/', ORIGIN + '/blog/', 'http://weifeijin.com', 'https://localhost', 'https://127.0.0.1', 'https://[::1]']) {
+    const { call } = fixture(t, { SITE_ORIGIN: origin });
+    assert.equal((await call('GET')).response.status, 503);
+  }
+});
+
 test('concurrent retries cannot inflate the count', async t => {
   const { call } = fixture(t);
   const visitor = randomUUID();
@@ -71,7 +104,7 @@ test('reading never writes and UUIDs are hashed before storage', async t => {
 
 test('production rejects foreign, missing, and localhost origins before mutation', async t => {
   const { call, DB } = fixture(t, { DEV_ORIGINS: 'http://localhost:4321' });
-  for (const origin of ['https://evil.example', 'null', '', 'http://localhost:4321', `${ORIGIN}.evil.example`]) {
+  for (const origin of ['https://evil.example', 'null', '', 'http://localhost:4321', 'https://localhost', 'http://weifeijin.com', 'https://www.weifeijin.com', 'https://likes.weifeijin.com', `${ORIGIN}/`, `${ORIGIN}.evil.example`, `${LEGACY_ORIGIN}.evil.example`]) {
     const result = await call('PUT', { visitor: randomUUID(), liked: true }, { headers: { Origin: origin } });
     assert.equal(result.response.status, 403);
     assert.equal(result.response.headers.has('Access-Control-Allow-Origin'), false);
@@ -89,10 +122,13 @@ test('loopback origins require explicit development configuration', async t => {
 
 test('CORS preflight allows only the supported method and header', async t => {
   const { call } = fixture(t);
-  const allowed = await call('OPTIONS', undefined, { headers: { 'Access-Control-Request-Method': 'PUT', 'Access-Control-Request-Headers': 'content-type' } });
-  assert.equal(allowed.response.status, 204);
-  assert.equal(allowed.response.headers.get('Access-Control-Allow-Origin'), ORIGIN);
-  assert.equal(allowed.response.headers.has('Access-Control-Allow-Credentials'), false);
+  for (const origin of [ORIGIN, LEGACY_ORIGIN]) {
+    const allowed = await call('OPTIONS', undefined, { headers: { Origin: origin, 'Access-Control-Request-Method': 'PUT', 'Access-Control-Request-Headers': 'content-type' } });
+    assert.equal(allowed.response.status, 204);
+    assert.equal(allowed.response.headers.get('Access-Control-Allow-Origin'), origin);
+    assert.equal(allowed.response.headers.has('Access-Control-Allow-Credentials'), false);
+  }
+  assert.equal((await call('OPTIONS', undefined, { headers: { Origin: 'https://evil.example', 'Access-Control-Request-Method': 'PUT' } })).response.status, 403);
   assert.equal((await call('OPTIONS', undefined, { headers: { 'Access-Control-Request-Method': 'DELETE' } })).response.status, 403);
   assert.equal((await call('OPTIONS', undefined, { headers: { 'Access-Control-Request-Method': 'PUT', 'Access-Control-Request-Headers': 'authorization' } })).response.status, 403);
 });

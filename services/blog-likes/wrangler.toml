@@ -5,8 +5,14 @@ workers_dev = true
 
 [vars]
 ENVIRONMENT = "production"
-SITE_ORIGIN = "https://weifeijin.github.io"
+SITE_ORIGIN = "https://weifeijin.com"
+TRANSITION_ORIGIN = "https://weifeijin.github.io"
 ALLOWED_SLUGS = "from-research-to-researcher"
+
+[[routes]]
+pattern = "likes.weifeijin.com"
+custom_domain = true
+zone_id = "1b987886dff1fadc769a64634550d09a"
 
 [[d1_databases]]
 binding = "DB"

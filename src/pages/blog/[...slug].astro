@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogViews from '../../components/BlogViews.astro';
 import BlogComments from '../../components/BlogComments.astro';
 import BlogLike from '../../components/BlogLike.astro';
-import { blogLikes, blogViewPaths } from '../../data/blog-interactions';
+import { blogLikes, blogViewUrls } from '../../data/blog-interactions';
 import { blogDate, blogUrl, groupBlogPosts, readingStats, type BlogEntry } from '../../data/blog';
 import '../../styles/blog.css';
 
@@ -39,7 +39,7 @@ languageAlternates.push({ lang: 'x-default', href: blogUrl(defaultTranslation) }
       <div class="blog-article-meta">
         <span>{chinese ? '发布于 ' : 'Published '}<time datetime={post.data.publishedAt}>{blogDate(post.data.publishedAt, post.data.language)}</time></span>
         {post.data.talkDate && <span>{chinese ? '分享于 ' : 'Talk given '}<time datetime={post.data.talkDate}>{blogDate(post.data.talkDate, post.data.language)}</time></span>}
-        <BlogViews canonicalUrl={new URL(blogViewPaths[post.data.slug] ?? `/blog/${post.data.slug}/`, Astro.site!).href} language={post.data.language} />
+        <BlogViews counterUrl={blogViewUrls[post.data.slug] ?? new URL(`/blog/${post.data.slug}/`, Astro.site!).href} language={post.data.language} />
       </div>
       <p class="blog-reading-stats">{stats.label}</p>
       <nav class="blog-language-switch" aria-label={chinese ? '文章语言' : 'Article language'}>

@@ -30,8 +30,8 @@ function browser({ fetchResponse, storage = new Map(), blockStorage = false } = 
   const element = {
     dataset: {
       slug: 'from-research-to-researcher', language: 'zh',
-      api: 'https://weifeijin-blog-likes.ninedreamwf.workers.dev',
-      siteOrigin: 'https://weifeijin.github.io',
+      api: 'https://likes.weifeijin.com',
+      siteOrigin: 'https://weifeijin.com',
     },
     querySelector: selector => selector === 'button' ? button : selector === '[data-like-count]' ? counter : status,
   };
@@ -39,7 +39,7 @@ function browser({ fetchResponse, storage = new Map(), blockStorage = false } = 
   runInNewContext(script, {
     document: { querySelectorAll: () => [element], addEventListener() {} },
     window: { addEventListener() {} },
-    location: { href: 'https://weifeijin.github.io/blog/from-research-to-researcher/', origin: 'https://weifeijin.github.io' },
+    location: { href: 'https://weifeijin.com/blog/from-research-to-researcher/', origin: 'https://weifeijin.com' },
     URL, Intl, AbortController,
     // Deliberately omit AbortSignal.timeout and crypto.randomUUID, as on older browsers.
     crypto: { getRandomValues: webcrypto.getRandomValues.bind(webcrypto) },
@@ -64,6 +64,7 @@ test('older browsers can load, like, and unlike without AbortSignal.timeout or r
   const ui = browser();
   await settle();
   assert.equal(ui.counter.textContent, '3');
+  assert.equal(ui.calls[0].url.href, 'https://likes.weifeijin.com/likes/from-research-to-researcher');
   assert.equal(ui.status.hidden, true);
   assert.equal(ui.timers.size, 0);
 
@@ -143,4 +144,47 @@ test('a lost response after a committed vote recovers authoritative state withou
   assert.equal(ui.calls.filter(call => call.options.method === 'PUT').length, 1);
   assert.equal(ui.calls.length, 3);
   assert.equal(ui.timers.size, 0);
+});
+
+const viewsSource = readFileSync(new URL('../../src/components/BlogViews.astro', import.meta.url), 'utf8');
+const viewsScript = ts.transpileModule(viewsSource.match(/<script>([\s\S]*?)<\/script>/)[1], {
+  compilerOptions: { target: ts.ScriptTarget.ES2020 },
+}).outputText;
+const originalCounterUrl = 'https://weifeijin.github.io/blog/from-doing-research-to-becoming-a-researcher/';
+
+function viewCounterBrowser({ origin = 'https://weifeijin.com', language = 'en' } = {}) {
+  const calls = [];
+  const label = { textContent: 'unavailable' };
+  const element = {
+    dataset: { url: originalCounterUrl, siteOrigin: 'https://weifeijin.com', language, loading: 'loading', unavailable: 'unavailable' },
+    querySelector: () => label,
+  };
+  runInNewContext(viewsScript, {
+    document: { querySelectorAll: () => [element], addEventListener() {} },
+    window: { setTimeout: () => 1, clearTimeout() {} },
+    location: { origin }, URL, Intl, AbortController,
+    fetch: async (url, options) => {
+      calls.push({ url, options });
+      return { ok: true, json: async () => ({ status: 'success', data: { page_pv: 1234 } }) };
+    },
+  });
+  return { calls, label };
+}
+
+test('views on the new domain retain the original shared counter URL in both languages', async () => {
+  for (const language of ['zh', 'en']) {
+    const ui = viewCounterBrowser({ language });
+    await settle();
+    assert.equal(ui.calls.length, 1);
+    assert.deepEqual(JSON.parse(ui.calls[0].options.body), { url: originalCounterUrl, isNewUv: false });
+    assert.equal(ui.label.textContent, language === 'zh' ? '1,234 次浏览' : '1,234 views');
+  }
+});
+
+test('local previews and mirrors cannot increment the preserved production counter', async () => {
+  for (const origin of ['http://localhost:4321', 'http://127.0.0.1:4321', 'https://evil.example']) {
+    const ui = viewCounterBrowser({ origin });
+    await settle();
+    assert.equal(ui.calls.length, 0);
+  }
 });
