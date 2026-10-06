@@ -3,16 +3,25 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
-interface Props { title?: string; description?: string; }
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: string;
+  languageAlternates?: { lang: string; href: string }[];
+  ogType?: 'website' | 'article';
+}
 const {
   title = 'Weifei Jin — AI Security Research',
   description = 'Weifei Jin is a Ph.D. student at Duke University working on AI security, trustworthy AI, agent safety, multimodal robustness, and secure AI memory.',
+  lang = 'en',
+  languageAlternates = [],
+  ogType = 'website',
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <script is:inline>
@@ -29,8 +38,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <meta name="theme-color" content="#fcfcfa" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {languageAlternates.map((alternate) => <link rel="alternate" hreflang={alternate.lang} href={new URL(alternate.href, Astro.site).toString()} />)}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />

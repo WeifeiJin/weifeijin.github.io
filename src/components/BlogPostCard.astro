@@ -1,0 +1,43 @@
+---
+import { blogDate, blogUrl, readingStats, type BlogEntry } from '../data/blog';
+
+interface Props { translations: BlogEntry[]; headingLevel?: 'h2' | 'h3'; }
+const { translations, headingLevel: Heading = 'h3' } = Astro.props;
+const primary = translations.find((post) => post.data.language === 'zh') ?? translations[0];
+const english = translations.find((post) => post.data.language === 'en');
+---
+
+<article class="blog-card">
+  <time datetime={primary.data.publishedAt}>{blogDate(primary.data.publishedAt, 'en')}</time>
+  <div class="blog-card-copy">
+    <Heading lang={primary.data.language === 'zh' ? 'zh-CN' : 'en'}><a href={blogUrl(primary)}>{primary.data.title}</a></Heading>
+    {english && primary.data.language !== 'en' && <p class="blog-card-translation" lang="en"><a href={blogUrl(english)}>{english.data.title}</a></p>}
+    <p class="blog-card-description" lang={primary.data.language === 'zh' ? 'zh-CN' : 'en'}>{primary.data.description}</p>
+    <div class="blog-card-languages" aria-label="Read this post in your preferred language">
+      {translations.map((post) => (
+        <a href={blogUrl(post)} lang={post.data.language === 'zh' ? 'zh-CN' : 'en'} hreflang={post.data.language === 'zh' ? 'zh-CN' : 'en'}>
+          <span>{post.data.language === 'zh' ? '中文' : 'English'} <span aria-hidden="true">→</span></span>
+          <span class="blog-card-stats">{readingStats(post).label}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</article>
+
+<style>
+  .blog-card { display: grid; grid-template-columns: 145px minmax(0, 1fr); gap: 32px; padding: 30px 0; border-block: 1px solid var(--line); }
+  .blog-card + .blog-card { border-top: 0; }
+  time { padding-top: 4px; color: var(--muted); font-size: 14px; line-height: 1.6; }
+  h2, h3 { margin: 0 0 9px; font-size: 25px; font-weight: 650; line-height: 1.5; letter-spacing: -.025em; }
+  .blog-card-translation { margin: 0 0 15px; color: var(--blue); font-size: 17px; line-height: 1.6; }
+  .blog-card-description { max-width: 720px; margin: 0 0 22px; color: var(--body-secondary); font-size: 16px; line-height: 1.8; }
+  .blog-card-languages { display: flex; flex-wrap: wrap; gap: 16px 32px; }
+  .blog-card-languages a { display: flex; flex-direction: column; gap: 5px; color: var(--blue); font-size: 14px; font-weight: 650; }
+  .blog-card-languages a:hover > span:first-child { text-decoration: underline; text-underline-offset: 4px; }
+  .blog-card-stats { color: var(--muted); font-size: 12px; font-weight: 400; }
+  @media (max-width: 760px) {
+    .blog-card { grid-template-columns: 1fr; gap: 13px; }
+    h2, h3 { font-size: 22px; }
+    .blog-card-translation { font-size: 16px; }
+  }
+</style>

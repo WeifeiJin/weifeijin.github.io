@@ -1,0 +1,66 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { blogDate, blogUrl, groupBlogPosts, readingStats, type BlogEntry } from '../../data/blog';
+import '../../styles/blog.css';
+
+export async function getStaticPaths() {
+  const posts = groupBlogPosts(await getCollection('blog')).flat();
+  return posts.map((post) => ({
+    params: { slug: post.data.slug + (post.data.language === 'en' ? '/en' : '') },
+    props: { post, translations: posts.filter((translation) => translation.data.slug === post.data.slug) },
+  }));
+}
+
+interface Props { post: BlogEntry; translations: BlogEntry[]; }
+const { post, translations } = Astro.props;
+const { Content, headings } = await render(post);
+const chinese = post.data.language === 'zh';
+const lang = chinese ? 'zh-CN' : 'en';
+const stats = readingStats(post);
+const toc = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+const languageAlternates = translations.map((translation) => ({
+  lang: translation.data.language === 'zh' ? 'zh-CN' : 'en', href: blogUrl(translation),
+}));
+const defaultTranslation = translations.find((translation) => translation.data.language === 'zh') ?? translations[0];
+languageAlternates.push({ lang: 'x-default', href: blogUrl(defaultTranslation) });
+---
+
+<BaseLayout title={`${post.data.title} — Weifei Jin`} description={post.data.description} lang={lang} languageAlternates={languageAlternates} ogType="article">
+  <article class="blog-article">
+    <header class="blog-article-header">
+      <a class="blog-back" href="/blog/">← {chinese ? '所有文章' : 'All posts'}</a>
+      <h1>{post.data.title}</h1>
+      <div class="blog-article-meta">
+        <span>{chinese ? '发布于 ' : 'Published '}<time datetime={post.data.publishedAt}>{blogDate(post.data.publishedAt, post.data.language)}</time></span>
+        {post.data.talkDate && <span>{chinese ? '分享于 ' : 'Talk given '}<time datetime={post.data.talkDate}>{blogDate(post.data.talkDate, post.data.language)}</time></span>}
+      </div>
+      <p class="blog-reading-stats">{stats.label}</p>
+      <nav class="blog-language-switch" aria-label={chinese ? '文章语言' : 'Article language'}>
+        {translations.sort((a, b) => a.data.language === b.data.language ? 0 : a.data.language === 'zh' ? -1 : 1).map((translation) => (
+          <a href={blogUrl(translation)} lang={translation.data.language === 'zh' ? 'zh-CN' : 'en'} hreflang={translation.data.language === 'zh' ? 'zh-CN' : 'en'} aria-current={translation.data.language === post.data.language ? 'page' : undefined}>
+            {translation.data.language === 'zh' ? '中文' : 'English'}
+          </a>
+        ))}
+      </nav>
+    </header>
+
+    <div class="blog-article-layout">
+      <div class="blog-article-main">
+        {post.data.introduction && <aside class="blog-introduction"><p>{post.data.introduction}</p></aside>}
+        {toc.length > 0 && <details class="blog-mobile-toc">
+          <summary>{chinese ? '目录' : 'Contents'}</summary>
+          <nav aria-label={chinese ? '文章目录' : 'Table of contents'}><ol>{toc.map((heading) => <li class:list={{ 'toc-subheading': heading.depth === 3 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></nav>
+        </details>}
+        <div class="blog-prose" data-talk={post.data.talkDate ? '' : undefined}><Content /></div>
+        <a class="blog-back blog-end-link" href="/blog/">← {chinese ? '返回 Blog' : 'Back to Blog'}</a>
+      </div>
+      {toc.length > 0 && <aside class="blog-desktop-toc">
+        <nav aria-label={chinese ? '文章目录' : 'Table of contents'}>
+          <h2>{chinese ? '目录' : 'Contents'}</h2>
+          <ol>{toc.map((heading) => <li class:list={{ 'toc-subheading': heading.depth === 3 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol>
+        </nav>
+      </aside>}
+    </div>
+  </article>
+</BaseLayout>

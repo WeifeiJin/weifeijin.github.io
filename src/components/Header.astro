@@ -7,6 +7,7 @@ const links = [
   { href: '/#research', label: 'Research' },
   { href: '/#experience', label: 'Experiences' },
   { href: '/publications/', label: 'Publications' },
+  { href: '/blog/', label: 'Blog' },
 ];
 ---
 
@@ -15,7 +16,7 @@ const links = [
   <div class="container header-inner">
     <a class="wordmark" href="/" aria-label="Weifei Jin, homepage">Weifei Jin</a>
     <nav class="desktop-nav" aria-label="Primary navigation">
-      {links.map((link) => <a href={link.href} aria-current={pathname === link.href ? 'page' : undefined}>{link.label}</a>)}
+      {links.map((link) => <a href={link.href} aria-current={pathname === link.href || (link.href === '/blog/' && pathname.startsWith('/blog/')) ? 'page' : undefined}>{link.label}</a>)}
     </nav>
     <div class="header-elsewhere" aria-label="Elsewhere">
       <a href={profile.scholar} target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">Scholar</a>
@@ -29,7 +30,7 @@ const links = [
     <details class="mobile-nav">
       <summary>Menu <span aria-hidden="true">+</span></summary>
       <nav aria-label="Mobile navigation">
-        {links.map((link) => <a href={link.href}>{link.label}</a>)}
+        {links.map((link) => <a href={link.href} aria-current={pathname === link.href || (link.href === '/blog/' && pathname.startsWith('/blog/')) ? 'page' : undefined}>{link.label}</a>)}
         <a href={profile.scholar} target="_blank" rel="noopener noreferrer">Google Scholar</a>
         <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href={'mailto:' + profile.email}>Email</a>

@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPostCard from '../../components/BlogPostCard.astro';
+import { groupBlogPosts } from '../../data/blog';
+const posts = groupBlogPosts(await getCollection('blog'));
+---
+
+<BaseLayout title="Blog — Weifei Jin" description="Writing by Weifei Jin on research and becoming a researcher, available in Chinese and English.">
+  <header class="page-intro"><h1>Blog</h1></header>
+  <div class="blog-archive">
+    {posts.map((translations) => <BlogPostCard translations={translations} headingLevel="h2" />)}
+  </div>
+</BaseLayout>
+
+<style>
+  .blog-archive { min-height: 45vh; padding-bottom: 100px; }
+</style>

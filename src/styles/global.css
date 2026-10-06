@@ -228,6 +228,9 @@ p, h1, h2, h3 { margin-top: 0; }
   .desktop-nav { gap: 13px; }
   .header-inner { gap: 16px; }
 }
+@media (max-width: 1000px) and (min-width: 761px) {
+  .header-elsewhere { display: none; }
+}
 @media (max-width: 760px) {
   .container { width: min(calc(100% - 40px), var(--max)); }
   .header-inner { min-height: 66px; }
