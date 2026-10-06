@@ -72,3 +72,28 @@ languageAlternates.push({ lang: 'x-default', href: blogUrl(defaultTranslation) }
   </article>
   {likesApi && <BlogLike slug={post.data.slug} language={post.data.language} apiUrl={likesApi} />}
 </BaseLayout>
+
+<script>
+  function fitBlogContents() {
+    const toc = document.querySelector<HTMLElement>('.blog-desktop-toc');
+    if (!toc || toc.dataset.viewportFitted) return;
+    toc.dataset.viewportFitted = 'true';
+    let queued = false;
+    const fit = () => {
+      queued = false;
+      // Reserve space below the visible directory for the fixed heart button.
+      toc.style.setProperty('--toc-viewport-space', `${Math.max(0, window.innerHeight - toc.getBoundingClientRect().top)}px`);
+    };
+    const schedule = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(fit);
+    };
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    void document.fonts.ready.then(schedule);
+    fit();
+  }
+  fitBlogContents();
+  document.addEventListener('astro:page-load', fitBlogContents);
+</script>
