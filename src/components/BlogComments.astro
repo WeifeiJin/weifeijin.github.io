@@ -47,22 +47,12 @@ const discussionUrl = discussionNumber
         status.hidden = false;
       };
 
-      async function loadComments() {
+      function loadComments() {
         status!.textContent = section.dataset.loading ?? 'Loading comments…';
         status!.hidden = false;
-        const controller = new AbortController();
-        const timeout = window.setTimeout(() => controller.abort(), 10000);
         try {
-          // Verify installation before embedding so readers never see setup errors.
-          const response = await fetch(`https://giscus.app/api/discussions/categories?repo=${encodeURIComponent(section.dataset.repo!)}`, {
-            signal: controller.signal, credentials: 'omit',
-          });
-          if (!response.ok) throw new Error('Comments unavailable');
-          const config = await response.json();
-          if (config.repositoryId !== section.dataset.repoId || !config.categories?.some((category: { id: string }) => category.id === section.dataset.categoryId)) {
-            throw new Error('Comments configuration unavailable');
-          }
-
+          // The official client loads its API inside the giscus iframe. Those
+          // endpoints cannot be preflighted with fetch from our site's origin.
           const script = document.createElement('script');
           script.src = 'https://giscus.app/client.js';
           script.async = true;
@@ -100,8 +90,6 @@ const discussionUrl = discussionNumber
           });
         } catch {
           showUnavailable();
-        } finally {
-          window.clearTimeout(timeout);
         }
       }
 
@@ -109,12 +97,12 @@ const discussionUrl = discussionNumber
         const observer = new IntersectionObserver((entries) => {
           if (entries.some((entry) => entry.isIntersecting)) {
             observer.disconnect();
-            void loadComments();
+            loadComments();
           }
         }, { rootMargin: '400px' });
         observer.observe(section);
       } else {
-        void loadComments();
+        loadComments();
       }
     });
   }
