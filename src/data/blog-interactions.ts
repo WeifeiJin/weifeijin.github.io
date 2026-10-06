@@ -5,6 +5,11 @@ export const blogComments = {
   categoryId: 'DIC_kwDOOC3vBs4DHI70',
   // Both translations use the same thread. New posts can let giscus create one.
   discussionNumbers: {
-    'from-doing-research-to-becoming-a-researcher': 1,
+    'from-research-to-researcher': 1,
   } as Record<string, number>,
+};
+
+// Keep the existing counter when an article's public URL changes.
+export const blogViewPaths: Record<string, string> = {
+  'from-research-to-researcher': '/blog/from-doing-research-to-becoming-a-researcher/',
 };

@@ -1,6 +1,6 @@
 ---
 title: "从做研究到作研究者"
-slug: "from-doing-research-to-becoming-a-researcher"
+slug: "from-research-to-researcher"
 language: "zh"
 publishedAt: "2026-10-06"
 talkDate: "2026-01-14"

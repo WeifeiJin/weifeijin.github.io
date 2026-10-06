@@ -60,8 +60,6 @@ export const researchExperience: ResearchExperience[] = [
     details: [
       'Mentor: ',
       { name: 'Dr. Derui Wang', url: 'https://neuralsec.github.io/cv/' },
-      '; collaborator: ',
-      { name: 'Dr. Minhui Xue', url: 'https://minhui-xue.github.io/' },
     ],
     logo: '/images/experience/csiro.png',
   },
