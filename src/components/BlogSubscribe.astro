@@ -1,0 +1,49 @@
+---
+interface Props { language?: 'zh' | 'en' | 'both'; }
+const { language = 'both' } = Astro.props;
+const showChinese = language !== 'en';
+const showEnglish = language !== 'zh';
+const heading = language === 'both' ? '订阅更新 · Subscribe' : language === 'zh' ? '订阅更新' : 'Subscribe';
+---
+
+<section class="blog-subscribe" data-blog-subscribe aria-labelledby="blog-subscribe-heading">
+  <h2 id="blog-subscribe-heading">{heading}</h2>
+  <div class="blog-subscribe-note">
+    {showChinese && <p lang="zh-CN">邮箱交由 EmailOctopus 处理，用于发送新文章更新；可随时退订。</p>}
+    {showEnglish && <p lang="en">EmailOctopus processes your email for new-post updates. Unsubscribe anytime.</p>}
+  </div>
+  <div class="blog-subscribe-form">
+    <script
+      is:inline
+      async
+      src="https://eomail5.com/form/10de4992-c1d0-11f1-b2f4-6328ab11288d.js"
+      data-form="10de4992-c1d0-11f1-b2f4-6328ab11288d"
+      onerror="this.closest('[data-blog-subscribe]')?.querySelector('[data-subscribe-error]')?.removeAttribute('hidden');"
+    ></script>
+    <noscript>
+      {showChinese && <p lang="zh-CN">请启用 JavaScript 以加载订阅表单。</p>}
+      {showEnglish && <p lang="en">Enable JavaScript to load the subscription form.</p>}
+    </noscript>
+  </div>
+  <div class="blog-subscribe-error" data-subscribe-error role="status" hidden>
+    {showChinese && <p lang="zh-CN">订阅表单暂时无法加载，请稍后刷新页面重试。</p>}
+    {showEnglish && <p lang="en">The subscription form could not load. Please refresh the page and try again later.</p>}
+  </div>
+</section>
+
+<style>
+  .blog-subscribe { max-width: 740px; margin-block: 32px; padding: 22px 24px; border: 1px solid var(--line); border-radius: 9px; background: var(--paper); color: var(--ink); }
+  .blog-subscribe h2 { margin: 0 0 10px; font-size: 18px; font-weight: 650; line-height: 1.5; }
+  .blog-subscribe-note { margin-bottom: 18px; color: var(--muted); }
+  .blog-subscribe-note p, .blog-subscribe-error p { margin: 0; font-size: 13px; line-height: 1.8; }
+  .blog-subscribe-note p + p, .blog-subscribe-error p + p { margin-top: 4px; }
+  /* The provider supplies a light form. Keep that surface explicit in either
+     site theme instead of restyling its fields or submission messages. */
+  .blog-subscribe-form { min-width: 0; padding: 14px 16px; border: 1px solid #e4e7e5; border-radius: 6px; background: #fff; color: #212529; color-scheme: light; }
+  .blog-subscribe-form :global(noscript p) { margin: 0; font-size: 13px; line-height: 1.8; }
+  .blog-subscribe-error { margin-top: 12px; color: var(--muted); }
+  @media (max-width: 480px) {
+    .blog-subscribe { padding: 18px; }
+    .blog-subscribe-form { padding: 12px; }
+  }
+</style>

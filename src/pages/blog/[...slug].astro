@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogViews from '../../components/BlogViews.astro';
 import BlogComments from '../../components/BlogComments.astro';
 import BlogLike from '../../components/BlogLike.astro';
+import BlogSubscribe from '../../components/BlogSubscribe.astro';
 import { blogLikes, blogViewUrls } from '../../data/blog-interactions';
 import { blogDate, blogUrl, groupBlogPosts, readingStats, type BlogEntry } from '../../data/blog';
 import '../../styles/blog.css';
@@ -59,6 +60,7 @@ languageAlternates.push({ lang: 'x-default', href: blogUrl(defaultTranslation) }
           <nav aria-label={chinese ? '文章目录' : 'Table of contents'}><ol>{toc.map((heading) => <li class:list={{ 'toc-subheading': heading.depth === 3 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></nav>
         </details>}
         <div class="blog-prose"><Content /></div>
+        <BlogSubscribe language={post.data.language} />
         <BlogComments slug={post.data.slug} language={post.data.language} />
         <a class="blog-back blog-end-link" href="/blog/">← {chinese ? '返回 Blog' : 'Back to Blog'}</a>
       </div>
