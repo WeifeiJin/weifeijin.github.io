@@ -3,7 +3,8 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogViews from '../../components/BlogViews.astro';
 import BlogComments from '../../components/BlogComments.astro';
-import { blogViewPaths } from '../../data/blog-interactions';
+import BlogLike from '../../components/BlogLike.astro';
+import { blogLikes, blogViewPaths } from '../../data/blog-interactions';
 import { blogDate, blogUrl, groupBlogPosts, readingStats, type BlogEntry } from '../../data/blog';
 import '../../styles/blog.css';
 
@@ -21,6 +22,7 @@ const { Content, headings } = await render(post);
 const chinese = post.data.language === 'zh';
 const lang = chinese ? 'zh-CN' : 'en';
 const stats = readingStats(post);
+const likesApi = import.meta.env.PUBLIC_BLOG_LIKES_API ?? blogLikes.apiUrl;
 const toc = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
 const languageAlternates = translations.map((translation) => ({
   lang: translation.data.language === 'zh' ? 'zh-CN' : 'en', href: blogUrl(translation),
@@ -68,4 +70,5 @@ languageAlternates.push({ lang: 'x-default', href: blogUrl(defaultTranslation) }
       </aside>}
     </div>
   </article>
+  {likesApi && <BlogLike slug={post.data.slug} language={post.data.language} apiUrl={likesApi} />}
 </BaseLayout>

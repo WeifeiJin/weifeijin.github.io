@@ -5,9 +5,6 @@ interface Props { slug: string; language: 'zh' | 'en'; }
 const { slug, language } = Astro.props;
 const chinese = language === 'zh';
 const discussionNumber = blogComments.discussionNumbers[slug];
-const discussionUrl = discussionNumber
-  ? `https://github.com/${blogComments.repo}/discussions/${discussionNumber}`
-  : `https://github.com/${blogComments.repo}/discussions`;
 ---
 
 <section
@@ -23,11 +20,9 @@ const discussionUrl = discussionNumber
   data-term={discussionNumber ?? `/blog/${slug}/`}
   data-language={chinese ? 'zh-CN' : 'en'}
   data-loading={chinese ? '正在加载评论…' : 'Loading comments…'}
-  data-unavailable={chinese ? '暂时无法加载嵌入评论，可以在 GitHub 中参与讨论。' : 'Embedded comments are unavailable. You can join the discussion on GitHub.'}
+  data-unavailable={chinese ? '评论暂时无法加载，请稍后重试。' : 'Comments are temporarily unavailable. Please try again later.'}
 >
   <h2 id="blog-comments-heading">{chinese ? '评论' : 'Comments'}</h2>
-  <p class="blog-comments-note">{chinese ? '中英文版共用点赞和评论，参与需使用 GitHub 账号。' : 'Both translations share reactions and comments. A GitHub account is required to participate.'}</p>
-  <a class="blog-back" href={discussionUrl} target="_blank" rel="noopener noreferrer">{chinese ? '在 GitHub 中打开讨论 ↗' : 'Open discussion on GitHub ↗'}</a>
   <p class="blog-comments-status" data-comment-status role="status" hidden></p>
   <div class="giscus" id="blog-discussion"></div>
 </section>
@@ -114,7 +109,6 @@ const discussionUrl = discussionNumber
 <style>
   .blog-comments { margin-top: 55px; padding-top: 32px; border-top: 1px solid var(--line); scroll-margin-top: 28px; }
   .blog-comments h2 { margin: 0 0 12px; color: var(--ink); font-size: 25px; font-weight: 650; }
-  .blog-comments-note, .blog-comments-status { color: var(--muted); font-size: 14px; line-height: 1.8; }
-  .blog-comments-note { margin: 0 0 10px; }
+  .blog-comments-status { color: var(--muted); font-size: 14px; line-height: 1.8; }
   .giscus { margin-top: 24px; min-width: 0; }
 </style>

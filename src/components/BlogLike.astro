@@ -1,0 +1,164 @@
+---
+interface Props { slug: string; language: 'zh' | 'en'; apiUrl: string; }
+const { slug, language, apiUrl } = Astro.props;
+const chinese = language === 'zh';
+---
+
+<div class="blog-like-float" data-blog-like data-slug={slug} data-language={language} data-api={apiUrl} data-site-origin={Astro.site?.origin}>
+  <button class="blog-like-button" type="button" disabled aria-pressed="false" aria-label={chinese ? '给这篇文章点赞' : 'Like this article'} title={chinese ? '点赞' : 'Like'}>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+      <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" />
+    </svg>
+    <span class="blog-like-count" data-like-count aria-live="polite">—</span>
+  </button>
+  <span class="blog-like-status" data-like-status role="status" hidden></span>
+</div>
+
+<script>
+  const visitorKey = 'weifei-blog-like-visitor';
+  const updateKey = 'weifei-blog-like-updated';
+  const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+  function initializeBlogLikes() {
+    document.querySelectorAll<HTMLElement>('[data-blog-like]').forEach((element) => {
+      if (element.dataset.initialized) return;
+      element.dataset.initialized = 'true';
+      const button = element.querySelector<HTMLButtonElement>('button');
+      const counter = element.querySelector<HTMLElement>('[data-like-count]');
+      const status = element.querySelector<HTMLElement>('[data-like-status]');
+      if (!button || !counter || !status) return;
+      const chinese = element.dataset.language === 'zh';
+      let visitor: string | null = null;
+      let liked = false;
+      let busy = false;
+      let ready = false;
+      let endpoint: URL;
+
+      const showError = (message: string) => {
+        status.textContent = message;
+        status.hidden = false;
+      };
+      try {
+        endpoint = new URL(`likes/${encodeURIComponent(element.dataset.slug!)}`, `${element.dataset.api!.replace(/\/$/, '')}/`);
+        const local = (url: URL) => ['localhost', '127.0.0.1'].includes(url.hostname);
+        // Local QA only uses its local database, never production votes.
+        if (local(new URL(location.href))) {
+          if (!local(endpoint)) return;
+        } else if (location.origin !== element.dataset.siteOrigin || endpoint.protocol !== 'https:') {
+          return;
+        }
+        const saved = localStorage.getItem(visitorKey);
+        if (saved && uuidPattern.test(saved)) visitor = saved;
+      } catch {
+        showError(chinese ? '点赞暂不可用' : 'Likes unavailable');
+        return;
+      }
+
+      async function requestState(desired?: boolean) {
+        const url = new URL(endpoint.href);
+        if (desired === undefined && visitor) url.searchParams.set('visitor', visitor);
+        const response = await fetch(url, {
+          method: desired === undefined ? 'GET' : 'PUT',
+          ...(desired === undefined ? {} : {
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ visitor, liked: desired }),
+          }),
+          credentials: 'omit',
+          cache: 'no-store',
+          signal: AbortSignal.timeout(8000),
+        });
+        if (!response.ok) throw new Error('Likes service unavailable');
+        const result = await response.json();
+        if (!Number.isSafeInteger(result.count) || result.count < 0 || typeof result.liked !== 'boolean') {
+          throw new Error('Invalid likes response');
+        }
+        liked = result.liked;
+        ready = true;
+        button!.setAttribute('aria-pressed', String(liked));
+        button!.setAttribute('aria-label', chinese ? (liked ? '取消这篇文章的点赞' : '给这篇文章点赞') : (liked ? 'Unlike this article' : 'Like this article'));
+        button!.title = chinese ? (liked ? '取消点赞' : '点赞') : (liked ? 'Unlike' : 'Like');
+        counter!.textContent = new Intl.NumberFormat(chinese ? 'zh-CN' : 'en', { notation: 'compact', maximumFractionDigits: 1 }).format(result.count);
+        status!.hidden = true;
+      }
+
+      async function refresh() {
+        if (busy) return;
+        busy = true;
+        button!.disabled = true;
+        try {
+          await requestState();
+        } catch {
+          showError(chinese ? '暂时无法加载点赞，点击爱心重试' : 'Could not load likes. Click the heart to retry.');
+          if (!ready) {
+            button!.setAttribute('aria-label', chinese ? '重试加载点赞' : 'Retry loading likes');
+            button!.title = chinese ? '重试加载点赞' : 'Retry loading likes';
+          }
+        } finally {
+          busy = false;
+          button!.disabled = false;
+        }
+      }
+
+      button.addEventListener('click', async () => {
+        if (busy) return;
+        if (!ready) { await refresh(); return; }
+        const desired = !liked;
+        try {
+          if (!visitor) {
+            const generated = crypto.randomUUID();
+            localStorage.setItem(visitorKey, generated);
+            visitor = localStorage.getItem(visitorKey);
+            if (visitor !== generated) throw new Error('Browser storage unavailable');
+          }
+        } catch {
+          showError(chinese ? '请允许浏览器存储后再点赞' : 'Enable browser storage to like this article');
+          return;
+        }
+        busy = true;
+        button!.disabled = true;
+        button!.setAttribute('aria-busy', 'true');
+        try {
+          await requestState(desired);
+          localStorage.setItem(updateKey, `${element.dataset.slug}:${crypto.randomUUID()}`);
+        } catch {
+          // A timeout can follow a committed vote. Read its authoritative state;
+          // PUT is idempotent, so a subsequent retry cannot add a duplicate vote.
+          try { await requestState(); } catch {}
+          if (liked !== desired) showError(chinese ? '未能保存，请稍后重试' : 'Could not save. Please try again.');
+        } finally {
+          busy = false;
+          button!.disabled = false;
+          button!.removeAttribute('aria-busy');
+        }
+      });
+      window.addEventListener('online', () => { void refresh(); });
+      window.addEventListener('storage', (event) => {
+        if (event.key === updateKey && event.newValue?.startsWith(`${element.dataset.slug}:`)) {
+          visitor = localStorage.getItem(visitorKey);
+          void refresh();
+        }
+      });
+      void refresh();
+    });
+  }
+
+  initializeBlogLikes();
+  document.addEventListener('astro:page-load', initializeBlogLikes);
+</script>
+
+<style>
+  .blog-like-float { position: fixed; z-index: 2; right: max(36px, calc((100vw - var(--max)) / 2 + 118px)); bottom: 28px; }
+  .blog-like-button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-width: 84px; height: 52px; padding: 0 16px; border: 1px solid var(--line); border-radius: 28px; background: var(--paper); color: var(--ink); box-shadow: 0 5px 20px var(--nav-shadow); font: inherit; cursor: pointer; transition: border-color .15s, background-color .15s, transform .15s; }
+  .blog-like-button svg { width: 23px; height: 23px; flex: none; color: var(--news-accent); }
+  .blog-like-button[aria-pressed="true"] svg { fill: currentColor; }
+  .blog-like-button:hover:not(:disabled) { border-color: var(--news-accent); transform: translateY(-2px); }
+  .blog-like-button:focus-visible { outline: 2px solid var(--news-accent); outline-offset: 4px; }
+  .blog-like-button:disabled { cursor: wait; opacity: .65; }
+  .blog-like-count { min-width: 12px; font-size: 14px; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .blog-like-status { position: absolute; right: 0; bottom: calc(100% + 10px); width: max-content; max-width: min(260px, calc(100vw - 32px)); padding: 9px 13px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--muted); font-size: 12px; line-height: 1.6; box-shadow: 0 5px 20px var(--nav-shadow); }
+  @media (max-width: 900px) {
+    .blog-like-float { right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); }
+    .blog-like-button { height: 48px; min-width: 76px; padding-inline: 13px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .blog-like-button { transition: none; } }
+</style>

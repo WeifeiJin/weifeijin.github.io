@@ -1,0 +1,17 @@
+name = "weifeijin-blog-likes"
+main = "worker.mjs"
+compatibility_date = "2026-10-06"
+workers_dev = true
+
+[vars]
+ENVIRONMENT = "production"
+SITE_ORIGIN = "https://weifeijin.github.io"
+ALLOWED_SLUGS = "from-research-to-researcher"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "weifeijin-blog-likes"
+database_id = "201a0a44-8281-4917-895e-d189c4066618"
+
+[observability]
+enabled = false

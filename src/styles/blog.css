@@ -29,7 +29,7 @@
 .blog-prose table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; }
 .blog-prose th, .blog-prose td { padding: 8px 14px; border: 1px solid var(--line); }
 .blog-end-link { margin-top: 38px; }
-.blog-desktop-toc { position: sticky; top: 28px; max-height: calc(100vh - 56px); overflow-y: auto; padding-left: 22px; border-left: 1px solid var(--line); }
+.blog-desktop-toc { position: sticky; top: 28px; max-height: calc(100vh - 150px); overflow-y: auto; padding-left: 22px; border-left: 1px solid var(--line); }
 .blog-desktop-toc h2 { margin: 0 0 17px; color: var(--ink); font-size: 14px; font-weight: 650; }
 .blog-desktop-toc ol, .blog-mobile-toc ol { margin: 0; padding: 0; list-style: none; }
 .blog-desktop-toc li { margin: 0 0 14px; }

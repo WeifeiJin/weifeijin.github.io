@@ -13,3 +13,8 @@ export const blogComments = {
 export const blogViewPaths: Record<string, string> = {
   'from-research-to-researcher': '/blog/from-doing-research-to-becoming-a-researcher/',
 };
+
+export const blogLikes = {
+  // Public Cloudflare Worker origin; never put credentials in this URL.
+  apiUrl: 'https://weifeijin-blog-likes.ninedreamwf.workers.dev',
+};
