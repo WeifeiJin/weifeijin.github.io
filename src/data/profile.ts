@@ -1,6 +1,6 @@
 export const profile = {
   name: 'Weifei Jin',
-  email: 'weifei.jin@duke.edu',
+  email: 'contact@weifeijin.com',
   scholar: 'https://scholar.google.com/citations?user=kg73XZAAAAAJ',
   github: 'https://github.com/WeifeiJin',
   linkedin: 'https://www.linkedin.com/in/weifei-jin-439b293b5/',
