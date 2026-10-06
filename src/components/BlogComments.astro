@@ -1,0 +1,132 @@
+---
+import { blogComments } from '../data/blog-interactions';
+
+interface Props { slug: string; language: 'zh' | 'en'; }
+const { slug, language } = Astro.props;
+const chinese = language === 'zh';
+const discussionNumber = blogComments.discussionNumbers[slug];
+const discussionUrl = discussionNumber
+  ? `https://github.com/${blogComments.repo}/discussions/${discussionNumber}`
+  : `https://github.com/${blogComments.repo}/discussions`;
+---
+
+<section
+  class="blog-comments"
+  id="comments"
+  aria-labelledby="blog-comments-heading"
+  data-blog-comments
+  data-repo={blogComments.repo}
+  data-repo-id={blogComments.repoId}
+  data-category={blogComments.category}
+  data-category-id={blogComments.categoryId}
+  data-mapping={discussionNumber ? 'number' : 'specific'}
+  data-term={discussionNumber ?? `/blog/${slug}/`}
+  data-language={chinese ? 'zh-CN' : 'en'}
+  data-loading={chinese ? '正在加载评论…' : 'Loading comments…'}
+  data-unavailable={chinese ? '暂时无法加载嵌入评论，可以在 GitHub 中参与讨论。' : 'Embedded comments are unavailable. You can join the discussion on GitHub.'}
+>
+  <h2 id="blog-comments-heading">{chinese ? '评论' : 'Comments'}</h2>
+  <p class="blog-comments-note">{chinese ? '中英文版共用此评论区，发表评论需使用 GitHub 账号。' : 'Both translations share this discussion. A GitHub account is required to comment.'}</p>
+  <a class="blog-back" href={discussionUrl} target="_blank" rel="noopener noreferrer">{chinese ? '在 GitHub 中打开讨论 ↗' : 'Open discussion on GitHub ↗'}</a>
+  <p class="blog-comments-status" data-comment-status role="status" hidden></p>
+  <div class="giscus" id="blog-discussion"></div>
+</section>
+
+<script>
+  function initializeBlogComments() {
+    document.querySelectorAll<HTMLElement>('[data-blog-comments]').forEach((section) => {
+      if (section.dataset.initialized) return;
+      section.dataset.initialized = 'true';
+      const status = section.querySelector<HTMLElement>('[data-comment-status]');
+      const container = section.querySelector<HTMLElement>('.giscus');
+      if (!status || !container) return;
+
+      const theme = () => document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+      const showUnavailable = () => {
+        status.textContent = section.dataset.unavailable ?? 'Comments unavailable';
+        status.hidden = false;
+      };
+
+      async function loadComments() {
+        status!.textContent = section.dataset.loading ?? 'Loading comments…';
+        status!.hidden = false;
+        const controller = new AbortController();
+        const timeout = window.setTimeout(() => controller.abort(), 10000);
+        try {
+          // Verify installation before embedding so readers never see setup errors.
+          const response = await fetch(`https://giscus.app/api/discussions/categories?repo=${encodeURIComponent(section.dataset.repo!)}`, {
+            signal: controller.signal, credentials: 'omit',
+          });
+          if (!response.ok) throw new Error('Comments unavailable');
+          const config = await response.json();
+          if (config.repositoryId !== section.dataset.repoId || !config.categories?.some((category: { id: string }) => category.id === section.dataset.categoryId)) {
+            throw new Error('Comments configuration unavailable');
+          }
+
+          const script = document.createElement('script');
+          script.src = 'https://giscus.app/client.js';
+          script.async = true;
+          script.crossOrigin = 'anonymous';
+          Object.assign(script.dataset, {
+            repo: section.dataset.repo,
+            repoId: section.dataset.repoId,
+            category: section.dataset.category,
+            categoryId: section.dataset.categoryId,
+            mapping: section.dataset.mapping,
+            term: section.dataset.term,
+            strict: '1',
+            reactionsEnabled: '0',
+            emitMetadata: '1',
+            inputPosition: 'top',
+            theme: theme(),
+            lang: section.dataset.language,
+          });
+          script.addEventListener('error', showUnavailable);
+          script.addEventListener('load', () => { status!.hidden = true; });
+          section.append(script);
+
+          new MutationObserver(() => {
+            script.dataset.theme = theme();
+            container!.querySelector<HTMLIFrameElement>('iframe.giscus-frame')?.contentWindow?.postMessage({
+              giscus: { setConfig: { theme: theme() } },
+            }, 'https://giscus.app');
+          }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+          window.addEventListener('message', (event) => {
+            const iframe = container!.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
+            if (event.origin !== 'https://giscus.app' || event.source !== iframe?.contentWindow || !event.data?.giscus) return;
+            if (event.data.giscus.error && !event.data.giscus.error.includes('Discussion not found')) showUnavailable();
+            if (event.data.giscus.discussion) status!.hidden = true;
+          });
+        } catch {
+          showUnavailable();
+        } finally {
+          window.clearTimeout(timeout);
+        }
+      }
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            observer.disconnect();
+            void loadComments();
+          }
+        }, { rootMargin: '400px' });
+        observer.observe(section);
+      } else {
+        void loadComments();
+      }
+    });
+  }
+
+  initializeBlogComments();
+  document.addEventListener('astro:page-load', initializeBlogComments);
+</script>
+
+<style>
+  .blog-comments { margin-top: 55px; padding-top: 32px; border-top: 1px solid var(--line); scroll-margin-top: 28px; }
+  .blog-comments h2 { margin: 0 0 12px; color: var(--ink); font-size: 25px; font-weight: 650; }
+  .blog-comments-note, .blog-comments-status { color: var(--muted); font-size: 14px; line-height: 1.8; }
+  .blog-comments-note { margin: 0 0 10px; }
+  .giscus { margin-top: 24px; min-width: 0; }
+</style>

@@ -1,0 +1,96 @@
+---
+interface Props {
+  /** Use the same production URL for every translation of an article. */
+  canonicalUrl: string;
+  language: 'zh' | 'en';
+}
+
+const { canonicalUrl, language } = Astro.props;
+const target = new URL(canonicalUrl);
+target.search = '';
+target.hash = '';
+const chinese = language === 'zh';
+---
+
+<span
+  class="blog-views"
+  data-blog-views
+  data-url={target.href}
+  data-language={language}
+  data-loading={chinese ? '浏览量加载中…' : 'Loading views…'}
+  data-unavailable={chinese ? '浏览量暂不可用' : 'Views unavailable'}
+>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+    <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" />
+    <circle cx="12" cy="12" r="3" />
+  </svg>
+  <span data-view-label aria-live="polite">{chinese ? '浏览量暂不可用' : 'Views unavailable'}</span>
+</span>
+
+<script>
+  async function loadArticleViews(element: HTMLElement) {
+    if (element.dataset.initialized) return;
+    element.dataset.initialized = 'true';
+    const label = element.querySelector<HTMLElement>('[data-view-label]');
+    const canonicalUrl = element.dataset.url;
+    if (!label || !canonicalUrl) return;
+
+    const unavailable = element.dataset.unavailable ?? 'Views unavailable';
+    let target: URL;
+    try {
+      target = new URL(canonicalUrl);
+    } catch {
+      label.textContent = unavailable;
+      return;
+    }
+
+    // Count only on the real site: development, previews, and mirrors must not
+    // change the production total. Queries/fragments never become new counters.
+    if (location.origin !== target.origin || target.protocol !== 'https:') return;
+
+    label.textContent = element.dataset.loading ?? 'Loading views…';
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 8000);
+    try {
+      // The official Vercount client uses this public v2 endpoint and JSON
+      // envelope. Supplying the common URL keeps Chinese/English counts joined.
+      // Only page views are needed, so no visitor cookie or identity is stored.
+      const response = await fetch('https://events.vercount.one/api/v2/log', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: target.href, isNewUv: false }),
+        credentials: 'omit',
+        signal: controller.signal,
+      });
+      if (!response.ok) throw new Error('View counter request failed');
+      const result = await response.json();
+      const count = result?.data?.page_pv;
+      if (result?.status !== 'success' || !Number.isSafeInteger(count) || count < 1) {
+        throw new Error('Invalid view counter response');
+      }
+      const chinese = element.dataset.language === 'zh';
+      const formatted = new Intl.NumberFormat(chinese ? 'zh-CN' : 'en-US').format(count);
+      label.textContent = chinese ? `${formatted} 次浏览` : `${formatted} ${count === 1 ? 'view' : 'views'}`;
+    } catch {
+      // A failed response might follow a successful increment, so do not retry
+      // or substitute a cached total from another article.
+      label.textContent = unavailable;
+    } finally {
+      window.clearTimeout(timeout);
+    }
+  }
+
+  function initializeArticleViews() {
+    document.querySelectorAll<HTMLElement>('[data-blog-views]').forEach((element) => {
+      void loadArticleViews(element);
+    });
+  }
+
+  initializeArticleViews();
+  document.addEventListener('astro:page-load', initializeArticleViews);
+</script>
+
+<style>
+  .blog-views { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-size: .9rem; line-height: 1.6; font-variant-numeric: tabular-nums; }
+  .blog-views svg { width: 17px; height: 17px; flex: none; }
+</style>

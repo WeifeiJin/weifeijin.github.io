@@ -31,13 +31,13 @@ export const researchAreas: ResearchArea[] = [
     paperSlugs: [],
     preprints: [
       {
-        title: 'Divide and Doubt: Diverse Distributed Poisoning for Retrieval-Augmented Generation',
-        url: 'https://arxiv.org/abs/2609.27090',
+        title: 'CleanBase: Detecting Malicious Documents in RAG Knowledge Databases',
+        url: 'https://arxiv.org/abs/2605.00460',
         year: 2026,
       },
       {
-        title: 'CleanBase: Detecting Malicious Documents in RAG Knowledge Databases',
-        url: 'https://arxiv.org/abs/2605.00460',
+        title: 'Divide and Doubt: Diverse Distributed Poisoning for Retrieval-Augmented Generation',
+        url: 'https://arxiv.org/abs/2609.27090',
         year: 2026,
       },
     ],

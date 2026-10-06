@@ -25,7 +25,7 @@ export const researchExperience: ResearchExperience[] = [
   {
     institution: 'Duke University',
     remote: true,
-    role: 'Undergrad Researcher',
+    role: 'Undergraduate Researcher',
     period: 'May 2025 – Nov 2025',
     details: ['Advisor: ', { name: 'Prof. Neil Gong', url: 'https://people.duke.edu/~zg70/' }],
     logo: '/images/experience/duke.png',

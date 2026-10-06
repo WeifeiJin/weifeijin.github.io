@@ -19,6 +19,12 @@ The old publication URLs are preserved as detail pages. The previous site linked
 
 The Experience logos come from [Simple Icons (ByteDance)](https://simpleicons.org/?q=bytedance) and Wikimedia's file pages for [Duke](https://commons.wikimedia.org/wiki/File:Duke_University_logo.svg), [Tsinghua](https://commons.wikimedia.org/wiki/File:Tsinghua_University_Logo.svg), [NUS](https://en.wikipedia.org/wiki/File:NationalUniversityofSingapore.svg), and [CSIRO](https://en.wikipedia.org/wiki/File:CSIRO_Logo.svg). They identify the institutions only; no endorsement is implied.
 
+## Blog interactions
+
+Article views use [Vercount](https://www.vercount.one/). Both translations send the same production article URL to its public API, so their counts are combined. Local previews do not increment counts. Counting starts when this integration goes live; a page view does not measure reading completion. Service failures show an unavailable state rather than a made-up count.
+
+Comments use [giscus](https://giscus.app/) and the repository's GitHub Discussions. Install the giscus GitHub App on **only this repository** to enable the embedded comment box. `src/data/blog-interactions.ts` contains the public repository/category IDs and existing discussion numbers. Both translations use the same discussion; future posts without a number use their shared article path and strict matching. Reactions are disabled. The widget loads near the bottom of an article, follows the page language and light/dark theme, and keeps a direct GitHub discussion link available if the embed cannot load.
+
 ## Deployment
 
 Pushing a completed build to `master` runs `.github/workflows/deploy.yml`. In GitHub repository settings, **Pages → Build and deployment → Source** must be set to **GitHub Actions**. The Astro `site` URL is configured for a user site without a base path.
