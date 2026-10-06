@@ -19,6 +19,15 @@ const chinese = language === 'zh';
   const updateKey = 'weifei-blog-like-updated';
   const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
+  function createVisitorId() {
+    if (typeof crypto.randomUUID === 'function') return crypto.randomUUID();
+    const bytes = crypto.getRandomValues(new Uint8Array(16));
+    bytes[6] = (bytes[6] & 0x0f) | 0x40;
+    bytes[8] = (bytes[8] & 0x3f) | 0x80;
+    const hex = Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+    return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+  }
+
   function initializeBlogLikes() {
     document.querySelectorAll<HTMLElement>('[data-blog-like]').forEach((element) => {
       if (element.dataset.initialized) return;
@@ -47,38 +56,47 @@ const chinese = language === 'zh';
         } else if (location.origin !== element.dataset.siteOrigin || endpoint.protocol !== 'https:') {
           return;
         }
-        const saved = localStorage.getItem(visitorKey);
-        if (saved && uuidPattern.test(saved)) visitor = saved;
       } catch {
         showError(chinese ? '点赞暂不可用' : 'Likes unavailable');
         return;
       }
+      // Reading the shared count does not require browser storage.
+      try {
+        const saved = localStorage.getItem(visitorKey);
+        if (saved && uuidPattern.test(saved)) visitor = saved;
+      } catch {}
 
       async function requestState(desired?: boolean) {
         const url = new URL(endpoint.href);
         if (desired === undefined && visitor) url.searchParams.set('visitor', visitor);
-        const response = await fetch(url, {
-          method: desired === undefined ? 'GET' : 'PUT',
-          ...(desired === undefined ? {} : {
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ visitor, liked: desired }),
-          }),
-          credentials: 'omit',
-          cache: 'no-store',
-          signal: AbortSignal.timeout(8000),
-        });
-        if (!response.ok) throw new Error('Likes service unavailable');
-        const result = await response.json();
-        if (!Number.isSafeInteger(result.count) || result.count < 0 || typeof result.liked !== 'boolean') {
-          throw new Error('Invalid likes response');
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 8000);
+        try {
+          const response = await fetch(url, {
+            method: desired === undefined ? 'GET' : 'PUT',
+            ...(desired === undefined ? {} : {
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ visitor, liked: desired }),
+            }),
+            credentials: 'omit',
+            cache: 'no-store',
+            signal: controller.signal,
+          });
+          if (!response.ok) throw new Error('Likes service unavailable');
+          const result = await response.json();
+          if (!Number.isSafeInteger(result.count) || result.count < 0 || typeof result.liked !== 'boolean') {
+            throw new Error('Invalid likes response');
+          }
+          liked = result.liked;
+          ready = true;
+          button!.setAttribute('aria-pressed', String(liked));
+          button!.setAttribute('aria-label', chinese ? (liked ? '取消这篇文章的点赞' : '给这篇文章点赞') : (liked ? 'Unlike this article' : 'Like this article'));
+          button!.title = chinese ? (liked ? '取消点赞' : '点赞') : (liked ? 'Unlike' : 'Like');
+          counter!.textContent = new Intl.NumberFormat(chinese ? 'zh-CN' : 'en', { notation: 'compact', maximumFractionDigits: 1 }).format(result.count);
+          status!.hidden = true;
+        } finally {
+          clearTimeout(timeout);
         }
-        liked = result.liked;
-        ready = true;
-        button!.setAttribute('aria-pressed', String(liked));
-        button!.setAttribute('aria-label', chinese ? (liked ? '取消这篇文章的点赞' : '给这篇文章点赞') : (liked ? 'Unlike this article' : 'Like this article'));
-        button!.title = chinese ? (liked ? '取消点赞' : '点赞') : (liked ? 'Unlike' : 'Like');
-        counter!.textContent = new Intl.NumberFormat(chinese ? 'zh-CN' : 'en', { notation: 'compact', maximumFractionDigits: 1 }).format(result.count);
-        status!.hidden = true;
       }
 
       async function refresh() {
@@ -105,7 +123,7 @@ const chinese = language === 'zh';
         const desired = !liked;
         try {
           if (!visitor) {
-            const generated = crypto.randomUUID();
+            const generated = createVisitorId();
             localStorage.setItem(visitorKey, generated);
             visitor = localStorage.getItem(visitorKey);
             if (visitor !== generated) throw new Error('Browser storage unavailable');
@@ -119,7 +137,7 @@ const chinese = language === 'zh';
         button!.setAttribute('aria-busy', 'true');
         try {
           await requestState(desired);
-          localStorage.setItem(updateKey, `${element.dataset.slug}:${crypto.randomUUID()}`);
+          localStorage.setItem(updateKey, `${element.dataset.slug}:${createVisitorId()}`);
         } catch {
           // A timeout can follow a committed vote. Read its authoritative state;
           // PUT is idempotent, so a subsequent retry cannot add a duplicate vote.
