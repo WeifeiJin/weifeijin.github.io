@@ -6,11 +6,11 @@ const showEnglish = language !== 'zh';
 const heading = language === 'both' ? '订阅更新 · Subscribe' : language === 'zh' ? '订阅更新' : 'Subscribe';
 ---
 
-<section class="blog-subscribe" data-blog-subscribe aria-labelledby="blog-subscribe-heading">
+<section class="blog-subscribe" data-blog-subscribe data-subscribe-language={language} aria-labelledby="blog-subscribe-heading">
   <h2 id="blog-subscribe-heading">{heading}</h2>
   <div class="blog-subscribe-note">
-    {showChinese && <p lang="zh-CN">邮箱交由 EmailOctopus 处理，用于发送新文章更新；可随时退订。</p>}
-    {showEnglish && <p lang="en">EmailOctopus processes your email for new-post updates. Unsubscribe anytime.</p>}
+    {showChinese && <p lang="zh-CN">订阅后通过邮件接收新文章，可随时退订。</p>}
+    {showEnglish && <p lang="en">Get new posts by email. Unsubscribe anytime.</p>}
   </div>
   <div class="blog-subscribe-form">
     <script
@@ -30,6 +30,30 @@ const heading = language === 'both' ? '订阅更新 · Subscribe' : language ===
     {showEnglish && <p lang="en">The subscription form could not load. Please refresh the page and try again later.</p>}
   </div>
 </section>
+
+<script>
+  for (const section of document.querySelectorAll('[data-blog-subscribe]')) {
+    const language = section.getAttribute('data-subscribe-language');
+    if (language !== 'zh' && language !== 'en') continue;
+
+    const container = section.querySelector('.blog-subscribe-form');
+    if (!container) continue;
+    const label = language === 'zh' ? '订阅' : 'Subscribe';
+
+    const localizeSubmitLabel = () => {
+      const submit = container.querySelector<HTMLInputElement>(
+        '[data-form="10de4992-c1d0-11f1-b2f4-6328ab11288d"] form.emailoctopus-form input[type="submit"]',
+      );
+      if (submit && submit.value !== label) submit.value = label;
+    };
+
+    // The official embed loads asynchronously. Only change its submit label;
+    // leave its fields, validation, submission and confirmation messages intact.
+    const observer = new MutationObserver(localizeSubmitLabel);
+    observer.observe(container, { childList: true, subtree: true });
+    localizeSubmitLabel();
+  }
+</script>
 
 <style>
   .blog-subscribe { max-width: 740px; margin-block: 32px; padding: 22px 24px; border: 1px solid var(--line); border-radius: 9px; background: var(--paper); color: var(--ink); }

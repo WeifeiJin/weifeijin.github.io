@@ -2,9 +2,14 @@
 interface Props { slug: string; language: 'zh' | 'en'; apiUrl: string; }
 const { slug, language, apiUrl } = Astro.props;
 const chinese = language === 'zh';
+// Accept the original site during migration and HTTP until Pages issues its
+// certificate. The API remains HTTPS and independently checks exact origins.
+const siteOrigins = [Astro.site?.origin, 'https://weifeijin.github.io']
+  .filter((origin): origin is string => Boolean(origin))
+  .flatMap(origin => [origin, origin.replace(/^https:/, 'http:')]);
 ---
 
-<div class="blog-like-float" data-blog-like data-slug={slug} data-language={language} data-api={apiUrl} data-site-origin={Astro.site?.origin}>
+<div class="blog-like-float" data-blog-like data-slug={slug} data-language={language} data-api={apiUrl} data-site-origins={siteOrigins.join(',')}>
   <button class="blog-like-button" type="button" disabled aria-pressed="false" aria-label={chinese ? '给这篇文章点赞' : 'Like this article'} title={chinese ? '点赞' : 'Like'}>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
       <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" />
@@ -53,7 +58,7 @@ const chinese = language === 'zh';
         // Local QA only uses its local database, never production votes.
         if (local(new URL(location.href))) {
           if (!local(endpoint)) return;
-        } else if (location.origin !== element.dataset.siteOrigin || endpoint.protocol !== 'https:') {
+        } else if (!element.dataset.siteOrigins?.split(',').includes(location.origin) || endpoint.protocol !== 'https:') {
           return;
         }
       } catch {

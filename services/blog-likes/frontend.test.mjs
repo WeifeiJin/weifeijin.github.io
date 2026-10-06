@@ -13,7 +13,7 @@ const visitorKey = 'weifei-blog-like-visitor';
 const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const settle = () => new Promise(resolve => setImmediate(resolve));
 
-function browser({ fetchResponse, storage = new Map(), blockStorage = false } = {}) {
+function browser({ fetchResponse, storage = new Map(), blockStorage = false, origin = 'https://weifeijin.com' } = {}) {
   const clickHandlers = {};
   const attributes = new Map();
   const timers = new Map();
@@ -31,7 +31,7 @@ function browser({ fetchResponse, storage = new Map(), blockStorage = false } = 
     dataset: {
       slug: 'from-research-to-researcher', language: 'zh',
       api: 'https://likes.weifeijin.com',
-      siteOrigin: 'https://weifeijin.com',
+      siteOrigins: 'https://weifeijin.com,http://weifeijin.com,https://weifeijin.github.io,http://weifeijin.github.io',
     },
     querySelector: selector => selector === 'button' ? button : selector === '[data-like-count]' ? counter : status,
   };
@@ -39,7 +39,7 @@ function browser({ fetchResponse, storage = new Map(), blockStorage = false } = 
   runInNewContext(script, {
     document: { querySelectorAll: () => [element], addEventListener() {} },
     window: { addEventListener() {} },
-    location: { href: 'https://weifeijin.com/blog/from-research-to-researcher/', origin: 'https://weifeijin.com' },
+    location: { href: `${origin}/blog/from-research-to-researcher/`, origin },
     URL, Intl, AbortController,
     // Deliberately omit AbortSignal.timeout and crypto.randomUUID, as on older browsers.
     crypto: { getRandomValues: webcrypto.getRandomValues.bind(webcrypto) },
@@ -81,6 +81,26 @@ test('older browsers can load, like, and unlike without AbortSignal.timeout or r
   assert.equal(JSON.parse(ui.calls[2].options.body).visitor, visitor);
   assert.equal(ui.storage.get(visitorKey), visitor);
   assert.equal(ui.timers.size, 0);
+});
+
+test('both site domains can read and vote while the Pages HTTPS certificate is pending', async () => {
+  for (const origin of ['https://weifeijin.com', 'http://weifeijin.com', 'https://weifeijin.github.io', 'http://weifeijin.github.io']) {
+    const ui = browser({ origin });
+    await settle();
+    assert.equal(ui.counter.textContent, '3');
+    await ui.click();
+    assert.equal(ui.counter.textContent, '4');
+    assert.equal(ui.calls[1].url.protocol, 'https:');
+    assert.equal(ui.attributes.get('aria-pressed'), 'true');
+  }
+});
+
+test('copied pages and local previews cannot send votes to the production API', async () => {
+  for (const origin of ['https://evil.example', 'https://weifeijin.com.evil.example', 'http://localhost:4321', 'http://127.0.0.1:4321']) {
+    const ui = browser({ origin });
+    await settle();
+    assert.equal(ui.calls.length, 0);
+  }
 });
 
 test('blocked storage still permits reading the shared count and prevents an untracked vote', async () => {
@@ -156,13 +176,13 @@ function viewCounterBrowser({ origin = 'https://weifeijin.com', language = 'en' 
   const calls = [];
   const label = { textContent: 'unavailable' };
   const element = {
-    dataset: { url: originalCounterUrl, siteOrigin: 'https://weifeijin.com', language, loading: 'loading', unavailable: 'unavailable' },
+    dataset: { url: originalCounterUrl, siteHostname: 'weifeijin.com', language, loading: 'loading', unavailable: 'unavailable' },
     querySelector: () => label,
   };
   runInNewContext(viewsScript, {
     document: { querySelectorAll: () => [element], addEventListener() {} },
     window: { setTimeout: () => 1, clearTimeout() {} },
-    location: { origin }, URL, Intl, AbortController,
+    location: new URL(origin), URL, Intl, AbortController,
     fetch: async (url, options) => {
       calls.push({ url, options });
       return { ok: true, json: async () => ({ status: 'success', data: { page_pv: 1234 } }) };

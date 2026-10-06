@@ -18,6 +18,11 @@ function allowedOrigins(env) {
     if (origin !== LEGACY_SITE_ORIGIN) throw new Error('Only the original GitHub Pages origin may be used during transition');
     origins.add(origin);
   }
+  // The Pages certificate may lag behind custom-domain DNS. Only permit the
+  // HTTP counterparts of the exact approved sites while explicitly enabled.
+  if (env.ALLOW_HTTP_TRANSITION === 'true') {
+    for (const origin of [...origins]) origins.add(origin.replace(/^https:/, 'http:'));
+  }
   if (env.ENVIRONMENT === 'development') {
     for (const value of (env.DEV_ORIGINS || '').split(',').filter(Boolean)) {
       const origin = value.trim();

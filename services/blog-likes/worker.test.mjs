@@ -65,6 +65,30 @@ test('legacy access can be disabled without accepting another transition origin'
   assert.equal((await call('GET', undefined, { headers: { Origin: LEGACY_ORIGIN } })).response.status, 403);
 });
 
+test('HTTP site access is explicit, temporary, and uses the same stored votes', async t => {
+  const { call } = fixture(t, { ALLOW_HTTP_TRANSITION: 'true' });
+  const visitor = randomUUID();
+  await call('PUT', { visitor, liked: true });
+  for (const origin of ['http://weifeijin.com', 'http://weifeijin.github.io']) {
+    const reply = await call('GET', undefined, { url: `${URL}?visitor=${visitor}`, headers: { Origin: origin } });
+    assert.equal(reply.response.status, 200);
+    assert.equal(reply.response.headers.get('Access-Control-Allow-Origin'), origin);
+    assert.deepEqual(reply.body, { count: 1, liked: true });
+    const preflight = await call('OPTIONS', undefined, { headers: { Origin: origin, 'Access-Control-Request-Method': 'PUT', 'Access-Control-Request-Headers': 'content-type' } });
+    assert.equal(preflight.response.status, 204);
+    assert.equal(preflight.response.headers.get('Access-Control-Allow-Origin'), origin);
+  }
+  for (const origin of ['http://evil.example', 'http://www.weifeijin.com', 'http://weifeijin.com.evil.example']) {
+    assert.equal((await call('GET', undefined, { headers: { Origin: origin } })).response.status, 403);
+  }
+});
+
+test('disabling legacy access also disables its HTTP counterpart during transition', async t => {
+  const { call } = fixture(t, { TRANSITION_ORIGIN: '', ALLOW_HTTP_TRANSITION: 'true' });
+  assert.equal((await call('GET', undefined, { headers: { Origin: 'http://weifeijin.com' } })).response.status, 200);
+  assert.equal((await call('GET', undefined, { headers: { Origin: 'http://weifeijin.github.io' } })).response.status, 403);
+});
+
 test('noncanonical, non-HTTPS, and foreign transition configuration fails closed', async t => {
   for (const origin of [LEGACY_ORIGIN + '/', LEGACY_ORIGIN + ':443', LEGACY_ORIGIN + '/blog/', 'http://weifeijin.github.io', 'https://evil.example', 'https://localhost', 'http://localhost:4321', LEGACY_ORIGIN + ',https://evil.example']) {
     const { call, DB } = fixture(t, { TRANSITION_ORIGIN: origin });

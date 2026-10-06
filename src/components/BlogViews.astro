@@ -16,7 +16,7 @@ const chinese = language === 'zh';
   class="blog-views"
   data-blog-views
   data-url={target.href}
-  data-site-origin={Astro.site?.origin}
+  data-site-hostname={Astro.site?.hostname}
   data-language={language}
   data-loading={chinese ? '浏览量加载中…' : 'Loading views…'}
   data-unavailable={chinese ? '浏览量暂不可用' : 'Views unavailable'}
@@ -45,10 +45,14 @@ const chinese = language === 'zh';
       return;
     }
 
-    // Count only on the real site: development, previews, and mirrors must not
-    // change the production total. A legacy counter URL can have a different
-    // origin from the current site; queries/fragments never become new counters.
-    if (location.origin !== element.dataset.siteOrigin || target.protocol !== 'https:') return;
+    // The production hostname can temporarily serve HTTP while its new HTTPS
+    // certificate is provisioning. Match the hostname, not the scheme, while
+    // excluding local previews, nonstandard ports, and unrelated mirrors.
+    // The unchanged legacy URL continues to identify the historical counter.
+    if (
+      location.hostname !== element.dataset.siteHostname || location.port ||
+      !['http:', 'https:'].includes(location.protocol) || target.protocol !== 'https:'
+    ) return;
 
     label.textContent = element.dataset.loading ?? 'Loading views…';
     const controller = new AbortController();
