@@ -4,6 +4,7 @@ export interface ResearchArea {
   subtitle: string;
   description: string;
   paperSlugs: string[];
+  preprints?: { title: string; url: string; year: number }[];
   currentTopics?: string[];
 }
 
@@ -28,6 +29,17 @@ export const researchAreas: ResearchArea[] = [
     subtitle: 'Secure AI Memory',
     description: 'Protecting RAG systems and external knowledge bases from context injection and poisoning.',
     paperSlugs: [],
-    currentTopics: ['RAG security', 'Knowledge poisoning', 'Persistent agent memory'],
+    preprints: [
+      {
+        title: 'Divide and Doubt: Diverse Distributed Poisoning for Retrieval-Augmented Generation',
+        url: 'https://arxiv.org/abs/2609.27090',
+        year: 2026,
+      },
+      {
+        title: 'CleanBase: Detecting Malicious Documents in RAG Knowledge Databases',
+        url: 'https://arxiv.org/abs/2605.00460',
+        year: 2026,
+      },
+    ],
   },
 ];

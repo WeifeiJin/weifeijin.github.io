@@ -52,7 +52,7 @@ languageAlternates.push({ lang: 'x-default', href: blogUrl(defaultTranslation) }
           <summary>{chinese ? '目录' : 'Contents'}</summary>
           <nav aria-label={chinese ? '文章目录' : 'Table of contents'}><ol>{toc.map((heading) => <li class:list={{ 'toc-subheading': heading.depth === 3 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></nav>
         </details>}
-        <div class="blog-prose" data-talk={post.data.talkDate ? '' : undefined}><Content /></div>
+        <div class="blog-prose"><Content /></div>
         <a class="blog-back blog-end-link" href="/blog/">← {chinese ? '返回 Blog' : 'Back to Blog'}</a>
       </div>
       {toc.length > 0 && <aside class="blog-desktop-toc">

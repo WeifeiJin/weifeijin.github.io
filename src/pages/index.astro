@@ -6,10 +6,6 @@ import NewsList from '../components/NewsList.astro';
 import ResearchExperience from '../components/ResearchExperience.astro';
 import { selectedPublications } from '../data/publications';
 import { mentoringCollaborations } from '../data/mentoring';
-import { getCollection } from 'astro:content';
-import BlogPostCard from '../components/BlogPostCard.astro';
-import { groupBlogPosts } from '../data/blog';
-const recentPosts = groupBlogPosts(await getCollection('blog')).slice(0, 2);
 
 ---
 
@@ -50,12 +46,6 @@ const recentPosts = groupBlogPosts(await getCollection('blog')).slice(0, 2);
   </section>
 
   <ResearchExperience />
-
-  <section id="blog" class="section" aria-labelledby="blog-title">
-    <div class="section-heading"><h2 id="blog-title">Blog</h2></div>
-    {recentPosts.map((translations) => <BlogPostCard translations={translations} />)}
-    <a class="section-more" href="/blog/">View all posts <span aria-hidden="true">→</span></a>
-  </section>
 
   <section id="awards" class="section recognition-section" aria-labelledby="awards-title">
     <div class="section-heading"><h2 id="awards-title">Awards</h2></div>

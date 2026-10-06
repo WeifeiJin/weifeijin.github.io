@@ -15,7 +15,6 @@
 .blog-introduction p { margin: 0; font-size: 16px; line-height: 1.9; }
 .blog-prose { font-size: 18px; line-height: 1.85; color: var(--body-secondary); overflow-wrap: anywhere; }
 :lang(zh-CN) .blog-prose { line-height: 1.95; letter-spacing: .015em; }
-.blog-prose[data-talk] > p:first-child { color: var(--muted); font-size: 14px; }
 .blog-prose p { margin: 0 0 1.3em; }
 .blog-prose h2 { margin: 2.3em 0 .8em; color: var(--ink); font-size: 27px; font-weight: 650; line-height: 1.5; letter-spacing: -.02em; scroll-margin-top: 28px; }
 .blog-prose h3 { margin: 1.8em 0 .7em; color: var(--ink); font-size: 22px; line-height: 1.5; scroll-margin-top: 28px; }

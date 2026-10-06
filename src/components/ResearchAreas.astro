@@ -17,7 +17,7 @@ const paperBySlug = new Map(publications.map((publication) => [publication.slug,
           <p class="area-subtitle">{area.subtitle}</p>
           <p class="area-description">{area.description}</p>
         </div>
-        {area.paperSlugs.length > 0 ? (
+        {area.paperSlugs.length > 0 || (area.preprints?.length ?? 0) > 0 ? (
           <div class="research-related">
             <h4>Related papers</h4>
             <ul>
@@ -26,6 +26,7 @@ const paperBySlug = new Map(publications.map((publication) => [publication.slug,
                 if (!paper) throw new Error(`Unknown research paper: ${slug}`);
                 return <li><a href={'/publication/' + paper.slug + '/'}>{paper.title}</a><span>{paper.venue}</span></li>;
               })}
+              {area.preprints?.map((paper) => <li><a href={paper.url} target="_blank" rel="noopener noreferrer">{paper.title}</a><span>arXiv preprint {paper.year}</span></li>)}
             </ul>
           </div>
         ) : (

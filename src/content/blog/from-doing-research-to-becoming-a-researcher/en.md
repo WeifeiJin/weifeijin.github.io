@@ -1,5 +1,5 @@
 ---
-title: "From Doing Research to Becoming a Researcher"
+title: "From Research to Researcher"
 slug: "from-doing-research-to-becoming-a-researcher"
 language: "en"
 publishedAt: "2026-10-06"
@@ -8,9 +8,7 @@ description: "A talk for undergraduates on getting started in research, developi
 introduction: "This is a talk about research that I gave to undergraduates in my school on January 14, 2026. Revisiting it today, nearly nine months later, I find that some of the practical techniques have changed so quickly that they no longer apply. But the underlying principles have not lost their relevance; if anything, they feel even more important. So I have transcribed the talk here."
 ---
 
-Speaker: Weifei Jin | January 14, 2026
-
-Hi everyone. I'm very happy to be here to share some thoughts with you. The title of this talk is “From Doing Research to Becoming a Researcher,” and the three keywords are action, understanding, and mindset. From the title, you can probably tell that I mainly want to talk about two questions: how to do research, and how to become a researcher.
+Hi everyone. I'm very happy to be here to share some thoughts with you. The title of this talk is “From Research to Researcher,” and the three keywords are action, understanding, and mindset. From the title, you can probably tell that I mainly want to talk about two questions: how to do research, and how to become a researcher.
 
 ## Getting Mentally Ready to Start Research
 
@@ -303,4 +301,3 @@ So the last lesson I want to share today is courage. I know some of you may be t
 But I also think there are some of you who want to try something different, who want to find your own path. Courage is the final lesson I want to leave with you.
 
 When you feel trapped, when it seems there's no way forward, courage will guide you to follow your convictions and find a path that is truly your own. Thank you, everyone.
-
