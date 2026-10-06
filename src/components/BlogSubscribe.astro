@@ -73,11 +73,79 @@ const heading = language === 'both' ? '订阅更新 · Subscribe' : language ===
   .blog-subscribe-note { margin-bottom: 18px; color: var(--muted); }
   .blog-subscribe-note p, .blog-subscribe-error p { margin: 0; font-size: 13px; line-height: 1.8; }
   .blog-subscribe-note p + p, .blog-subscribe-error p + p { margin-top: 4px; }
-  /* The provider supplies a light form. Keep that surface explicit in either
-     site theme instead of restyling its fields or submission messages. */
-  .blog-subscribe-form { min-width: 0; padding: 14px 16px; border: 1px solid #e4e7e5; border-radius: 6px; background: #fff; color: #212529; color-scheme: light; }
+  .blog-subscribe-form { min-width: 0; padding: 14px 16px; border: 1px solid var(--line); border-radius: 6px; background: var(--related-bg); color: var(--ink); color-scheme: inherit; }
+  /* Map the embedded form's colors to the live site theme. Keep its markup,
+     submission state and provider branding intact. */
+  .blog-subscribe-form :global([data-form="10de4992-c1d0-11f1-b2f4-6328ab11288d"]) {
+    --text-colour: var(--ink);
+    color: var(--ink);
+    font-family: inherit;
+    color-scheme: inherit;
+  }
+  .blog-subscribe-form :global(.emailoctopus-form) {
+    --field-colour: var(--paper);
+    --field-border-colour: var(--line);
+    --label-colour: var(--ink);
+    --button-colour: var(--blue);
+    --button-text-colour: var(--button-text);
+    --eo-form-font-color: var(--ink);
+    --eo-form-placeholder: var(--muted);
+    --eo-form-input-background: var(--paper);
+    --eo-form-border-color: var(--line);
+    color: var(--ink);
+  }
+  .blog-subscribe-form :global(.emailoctopus-form label) { color: var(--ink); font-family: inherit; }
+  .blog-subscribe-form :global(.emailoctopus-form input[type="email"]) {
+    background-color: var(--paper);
+    border-color: var(--line);
+    color: var(--ink);
+    caret-color: var(--ink);
+    font-family: inherit;
+  }
+  .blog-subscribe-form :global(.emailoctopus-form input[type="email"]::placeholder) { color: var(--muted); opacity: 1; }
+  .blog-subscribe-form :global(.emailoctopus-form input[type="email"]:focus) {
+    background-color: var(--paper);
+    border-color: var(--blue);
+    color: var(--ink);
+    box-shadow: 0 0 0 3px var(--blue-soft);
+  }
+  .blog-subscribe-form :global(.emailoctopus-form input[type="submit"]) {
+    background-color: var(--blue);
+    border-color: var(--blue);
+    color: var(--button-text);
+    font-family: inherit;
+  }
+  .blog-subscribe-form :global(.emailoctopus-form input[type="submit"]:hover:not(:disabled)),
+  .blog-subscribe-form :global(.emailoctopus-form input[type="submit"]:active:not(:disabled)) {
+    background-color: var(--blue-hover);
+    border-color: var(--blue-hover);
+    color: var(--button-text);
+  }
+  .blog-subscribe-form :global(.emailoctopus-form input[type="submit"]:focus) {
+    color: var(--button-text);
+    box-shadow: 0 0 0 3px var(--blue-soft);
+  }
+  .blog-subscribe-form :global(.emailoctopus-form input:focus-visible) { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .blog-subscribe-form :global(.emailoctopus-form input[type="submit"]:disabled) {
+    background-color: var(--blue);
+    border-color: var(--blue);
+    color: var(--button-text);
+    opacity: .6;
+    cursor: wait;
+  }
+  .blog-subscribe-form :global(.emailoctopus-success-message),
+  .blog-subscribe-form :global(.emailoctopus-error-message) { font-size: 14px; line-height: 1.7; }
+  /* The provider marks these message colors important, so override only those
+     color declarations inside this subscription section. */
+  .blog-subscribe-form :global(.emailoctopus-success-message) { color: var(--ink) !important; }
+  .blog-subscribe-form :global(.emailoctopus-error-message) { color: var(--news-accent) !important; }
+  .blog-subscribe-form :global(.mastfoot) { font-family: inherit; }
+  .blog-subscribe-form :global(.mastfoot p) { background: transparent; border-color: transparent; color: var(--muted); }
+  .blog-subscribe-form :global(.mastfoot a) { color: var(--blue); }
+  .blog-subscribe-form :global(.mastfoot a:hover) { color: var(--blue-hover); }
+  .blog-subscribe-form :global(.mastfoot a:focus-visible) { outline: 2px solid var(--blue); outline-offset: 2px; }
   .blog-subscribe-form :global(noscript p) { margin: 0; font-size: 13px; line-height: 1.8; }
-  .blog-subscribe-error { margin-top: 12px; color: var(--muted); }
+  .blog-subscribe-error { margin-top: 12px; color: var(--news-accent); }
   @media (max-width: 480px) {
     .blog-subscribe { padding: 18px; }
     .blog-subscribe-form { padding: 12px; }
